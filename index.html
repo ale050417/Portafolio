@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <title>Mi Portafolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+
+
+        <!-------------navbar------------->
+        <nav class="navbar">
+            <div class="box theme">
+                <div class="item" onclick="theme()">
+                    <ion-icon id="lightBtn" name="sunny-outline"></ion-icon>
+                    <ion-icon id="darkBtn" name="moon-outline" style="display: none;"></ion-icon>
+                </div>
+            </div>
+            <div class="box nav">
+                <div class="item">
+                    <a href="about">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                        <p>about</p>
+                    </a>
+                    <div class="divider rtl"></div>
+                </div>
+                <div class="item">
+                    <a href="resume">
+                        <ion-icon name="file-tray-full-outline"></ion-icon>
+                        <p>resume</p>
+                    </a>
+                    <div class="divider rtl"></div>
+                </div>
+                <div class="item">
+                    <a href="projects">
+                        <ion-icon name="layers-outline"></ion-icon>
+                        <p>projects</p>
+                    </a>
+                    <div class="divider rtl"></div>
+                </div>
+                <div class="item">
+                    <a href="blogs">
+                        <ion-icon name="reader-outline"></ion-icon>
+                        <p>blogs</p>
+                    </a>
+                    <div class="divider rtl"></div>
+                </div>
+                <div class="item">
+                    <a href="contact">
+                        <ion-icon name="layers-outline"></ion-icon>
+                        <p>contact</p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-------------profile------------->
+        <div class="box profile">
+            <img class="header" src="assets/Foto grande.png" alt="">
+            <img class="img" src="assets/Foto de perfil.png" alt="">
+            <h2>Alexander Ibarra</h2>
+            <p id="typed" class="colored"></p>
+
+            <ul>
+                <li><a href="#"><ion-icon name="logo-github"></ion-icon></a></li>
+                <li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+                <li><a href="#"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+            </ul>
+
+            <div class="footer">
+                <div class="divider rtl"></div>
+                <table>
+                    <tr>
+                        <td><a href="#">my resume<ion-icon name="file-tray-full-outline"></ion-icon></a></td>
+                        <td><a href="#">contact me<ion-icon name="call-outline"></ion-icon></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-------------content------------->
+        <div class="box content">
+            <div class="wrapper">
+                <h2>Hey <span class="colored">there!</span> manito</h2>
+                <div class="divider ltr"></div>
+                <p>Soy un desarrollador en formación con una fuerte pasión por la tecnología. Actualmente me encuentro
+                    creando y aprendiendo a desarrollar proyectos que buscan resolver problemas reales y mejorar la
+                    experiencia de las personas. <span class="colored">Me caracterizo por la curiosidad, el compromiso y
+                        las
+                        ganas de seguir creciendo profesionalmente.</span>
+                </p>
+                <div class="divider ltr"></div>
+                <!-------------achivaments------------->
+                <section class="achivaments">
+                    <div>
+                        <h3 class="section-title">Actualmente trabajando en:</h3>
+                    </div>
+                    <ul class="progress-list">
+                        <li><ion-icon name="briefcase-outline"></ion-icon> Portafolio personal</li>
+                        <li><ion-icon name="school-outline"></ion-icon> Tesis IAES (Analista de Sistemas)</li>
+                        <li><ion-icon name="calculator-outline"></ion-icon> Sistema de amortización (académico)</li>
+                        <li><ion-icon name="cart-outline"></ion-icon> E-commerce Hefesto</li>
+                    </ul>
+                </section>
+
+                <!-------------skills------------->
+                <div class="divider"></div>
+                <h2>my <spnan class="colored">Skills</spnan>
+                </h2>
+                <div class="divider ltr"></div>
+
+                <section class="skills">
+                    <h3>Tecnologias</h3>
+                    <section class="skills-grid">
+                        <div class="skill">
+                            <span class="iconify tech-icon" data-icon="simple-icons:flutter"></span>
+                            <p>Flutter</p>
+                        </div>
+                        <div class="skill">
+                            <span class="iconify tech-icon" data-icon="simple-icons:dart"></span>
+                            <p>Dart</p>
+                        </div>
+                        <div class="skill"><span class="iconify tech-icon" data-icon="simple-icons:firebase"></span>
+                            <p>Firebase</p>
+                        </div>
+                        <div class="skill"><span class="iconify tech-icon" data-icon="simple-icons:arduino"></span>
+                            <p>Arduino</p>
+                        </div>
+                    </section>
+
+                    <h3>Herramientas</h3>
+                    <section class="skills-grid">
+                        <div class="skill"><span class="iconify tech-icon" data-icon="simple-icons:github"></span>
+                            <p>GitHub</p>
+                        </div>
+                        <div class="skill"><span class="iconify tech-icon"
+                                data-icon="simple-icons:visualstudiocode"></span>
+                            <p>Visual Studio Code</p>
+                        </div>
+                        <div class="skill"><span class="iconify tech-icon"
+                                data-icon="simple-icons:androidstudio"></span>
+                            <p>Android Studio</p>
+                        </div>
+                    </section>
+
+                    <h3>En aprendizaje</h3>
+                    <section class="skills-grid">
+                        <div class="skill"><span class="iconify tech-icon" data-icon="simple-icons:html5"></span>
+                            <p>HTML</p>
+                        </div>
+                        <div class="skill"><span class="iconify tech-icon" data-icon="simple-icons:css3"></span>
+                            <p>CSS</p>
+                        </div>
+                        <div class="skill"><span class="iconify tech-icon"
+                                data-icon="simple-icons:javascript"></span>JavaScript<p></p>
+                        </div>
+                        <div class="skill"><span class="iconify tech-icon"
+                                data-icon="simple-icons:postgresql"></span>PostgresSQL<p></p>
+                        </div>
+                    </section>
+                </section>
+                <!------------- experience ------------->
+
+                <h1>My <span class="colored">experience</span></h1>
+                <div class="divider ltr"></div>
+                <div class="experience">
+                    <h2>Escuela de Robótica</h2>
+                    <h4>Proyectos educativos <span class="date">Marzo, 2022</span> &#x26AC; <span
+                            class="date">Actualmente</span></h4>
+                    <p>
+                        Participación en el desarrollo y acompañamiento de proyectos tecnológicos
+                        en el ámbito educativo, trabajando con Arduino, sensores y lógica de
+                        programación. Experiencia práctica en la creación de soluciones didácticas,
+                        prototipos y sistemas básicos orientados al aprendizaje tecnológico.
+                    </p>
+                </div>
+
+                <section class="experiences">
+                    <div class="experience">
+                        <h2>Desarrollador de Software en formación</h2>
+                        <h4>Proyectos académicos y personales</h4>
+                        <p>
+                            Actualmente me encuentro desarrollando distintos proyectos como parte de
+                            mi formación y crecimiento profesional. Entre ellos, un sistema de ventas
+                            con React y PostgreSQL, un sistema de amortización para Matemática en Flutter,
+                            mi tesis con Flutter y PostgreSQL, y un portafolio web creado con HTML, CSS y JavaScript.
+                        </p>
+                    </div>
+
+                    <div class="experience">
+                        <h2>Proyecto: Sistema de Ventas</h2>
+                        <h4>React · PostgreSQL</h4>
+                        <p>
+                            Desarrollo de un sistema de ventas funcional enfocado en buenas prácticas
+                            de arquitectura y diseño. El proyecto incluye manejo de estado, reportes,
+                            gráficos, autenticación y una estructura basada en componentes reutilizables.
+                            Actualmente en proceso de implementación y mejora continua.
+                        </p>
+                    </div>
+
+                    <div class="experience">
+                        <h2>Proyecto académico: Sistema de Amortización</h2>
+                        <h4>Flutter · Dart</h4>
+                        <p>
+                            Desarrollo de un sistema de amortización como proyecto académico para Matemática.
+                            El objetivo es calcular y comparar planes de amortización, mostrando cuotas,
+                            intereses y saldo de forma clara. Actualmente en construcción y validación de resultados.
+                        </p>
+                    </div>
+
+                    <div class="experience">
+                        <h2>Proyecto académico y tesis</h2>
+                        <h4>Flutter · PostgreSQL</h4>
+                        <p>
+                            Desarrollo de un sistema como trabajo final de tesis para la carrera de
+                            Analista de Sistemas. El proyecto está orientado a la creación de una
+                            aplicación funcional utilizando Flutter como frontend y PostgreSQL como
+                            base de datos.
+                        </p>
+                    </div>
+
+                </section>
+
+
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
