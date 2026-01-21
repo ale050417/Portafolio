@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <script type="module"
+        src="https://cdn.jsdelivr.net/npm/@mariohamann/activity-graph/dist/activity-graph.min.js"></script>
     <title>Mi Portafolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -53,7 +55,7 @@
                 </div>
                 <div class="item">
                     <a href="contact">
-                        <ion-icon name="layers-outline"></ion-icon>
+                        <ion-icon name="call-outline"></ion-icon>
                         <p>contact</p>
                     </a>
                 </div>
@@ -96,22 +98,10 @@
                         ganas de seguir creciendo profesionalmente.</span>
                 </p>
                 <div class="divider ltr"></div>
-                <!-------------achivaments------------->
-                <section class="achivaments">
-                    <div>
-                        <h3 class="section-title">Actualmente trabajando en:</h3>
-                    </div>
-                    <ul class="progress-list">
-                        <li><ion-icon name="briefcase-outline"></ion-icon> Portafolio personal</li>
-                        <li><ion-icon name="school-outline"></ion-icon> Tesis IAES (Analista de Sistemas)</li>
-                        <li><ion-icon name="calculator-outline"></ion-icon> Sistema de amortización (académico)</li>
-                        <li><ion-icon name="cart-outline"></ion-icon> E-commerce Hefesto</li>
-                    </ul>
-                </section>
 
                 <!-------------skills------------->
                 <div class="divider"></div>
-                <h2>my <spnan class="colored">Skills</spnan>
+                <h2>my <span class="colored">Skills</spnan>
                 </h2>
                 <div class="divider ltr"></div>
 
@@ -157,11 +147,11 @@
                         <div class="skill"><span class="iconify tech-icon" data-icon="simple-icons:css3"></span>
                             <p>CSS</p>
                         </div>
-                        <div class="skill"><span class="iconify tech-icon"
-                                data-icon="simple-icons:javascript"></span>JavaScript<p></p>
+                        <div class="skill"><span class="iconify tech-icon" data-icon="simple-icons:javascript"></span>
+                            <p>JavaScript</p>
                         </div>
-                        <div class="skill"><span class="iconify tech-icon"
-                                data-icon="simple-icons:postgresql"></span>PostgresSQL<p></p>
+                        <div class="skill"><span class="iconify tech-icon" data-icon="simple-icons:postgresql"></span>
+                            <p>PostgresSQL</p>
                         </div>
                     </section>
                 </section>
@@ -192,7 +182,7 @@
                             mi tesis con Flutter y PostgreSQL, y un portafolio web creado con HTML, CSS y JavaScript.
                         </p>
                     </div>
-
+                    <!--
                     <div class="experience">
                         <h2>Proyecto: Sistema de Ventas</h2>
                         <h4>React · PostgreSQL</h4>
@@ -223,9 +213,50 @@
                             aplicación funcional utilizando Flutter como frontend y PostgreSQL como
                             base de datos.
                         </p>
-                    </div>
+                    </div>-->
 
                 </section>
+
+                <!------------- contributions ------------->
+                <h1>My <span class="colored">contributions</span></h1>
+                <div class="divider ltr"></div>
+
+                <section class="contribution">
+                    <div class="wrapper"> <activity-graph range-start="2021-01-01" range-end="2026-12-31"
+                            activity-data="2021-01-01,2021-01-02,2021-01-03" activity-levels="0,1,2,3,5">
+                        </activity-graph>
+                </section>
+
+                <!------------- projects ------------->
+
+                <!-- <h1>my <span class="colored">projects</span></h1>
+                <div class="divider ltr"></div>
+
+                <section class="blogs">
+                    <div class="blog-box">
+                        <img src="img/" alt="">
+                        <div>
+                            <h3></h3>
+                            <p></p>
+                            <span></span>
+                        </div>
+                    </div>
+                </section>
+            -->
+                <!-------------achivaments------------->
+                <section class="achivaments">
+                    <div>
+                        <h3 class="section-title">Actualmente trabajando en:</h3>
+                    </div>
+                    <ul class="progress-list">
+                        <li><ion-icon name="briefcase-outline"></ion-icon> Portafolio personal</li>
+                        <li><ion-icon name="school-outline"></ion-icon> Tesis IAES (Analista de Sistemas)</li>
+                        <li><ion-icon name="calculator-outline"></ion-icon> Sistema de amortización (académico)</li>
+                        <li><ion-icon name="cart-outline"></ion-icon> E-commerce Hefesto</li>
+                    </ul>
+                </section>
+
+
 
 
             </div>

@@ -23,3 +23,9 @@ function theme (){
         lightBtn.style.display = 'block';
     }
 }
+
+const graph = document.getElementById("activityGraph");
+
+const today = new Date().toISOString().split("T")[0];
+
+graph.setAttribute("range-end", today);
