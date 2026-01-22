@@ -40,10 +40,6 @@ function theme() {
     }
 }
 
-const graph = document.getElementById("activityGraph");
-
-const today = new Date().toISOString().split("T")[0];
-
 //menu
 const menuItems = document.querySelectorAll('.nav .item');
 
@@ -153,28 +149,25 @@ if (form) {
 }
 
 //grafico de git
-async function loadGithubContributions() {
-  try {
-    const graph = document.getElementById("activityGraph");
-    if (!graph) return;
+async function loadContributions() {
+  const graph = document.getElementById("activityGraph");
+  if (!graph) return;
 
-    const res = await fetch("/api/github-contributions");
+  try {
+    const res = await fetch("/api/github", { cache: "no-store" });
     const data = await res.json();
 
-    if (!res.ok) throw new Error(data.error || "No se pudo cargar contribuciones.");
+    if (!res.ok) throw new Error(data.error || "Error cargando contribuciones");
 
-    // Ajustes del gráfico
+    // Cargar datos en el componente
     if (data.rangeStart) graph.setAttribute("range-start", data.rangeStart);
     if (data.rangeEnd) graph.setAttribute("range-end", data.rangeEnd);
+    graph.setAttribute("activity-data", data.activityData || "");
 
-    // IMPORTANTÍSIMO: esto es lo que dibuja los cuadraditos
-    graph.setAttribute("activity-data", data.activityData);
-
-    // Niveles (como capeamos a 10, tiene sentido esto)
-    graph.setAttribute("activity-levels", "0,1,2,4,7");
-  } catch (e) {
-    console.log("GitHub contributions error:", e.message);
+  } catch (err) {
+    console.error("Contributions:", err.message);
+    // opcional: mostrar algo en UI si falla
   }
 }
 
-loadGithubContributions();
+document.addEventListener("DOMContentLoaded", loadContributions);
