@@ -9,7 +9,7 @@ var typed = new Typed("#typed", {
 });
 
 //theme
-function theme (){
+function theme() {
     const darkBtn = document.getElementById('darkBtn');
     const lightBtn = document.getElementById('lightBtn');
 
@@ -18,7 +18,7 @@ function theme (){
     if (document.body.classList.contains('light')) {
         darkBtn.style.display = 'block';
         lightBtn.style.display = 'none';
-    }else{
+    } else {
         darkBtn.style.display = 'none';
         lightBtn.style.display = 'block';
     }
@@ -31,78 +31,91 @@ const today = new Date().toISOString().split("T")[0];
 //menu toogle
 const menuItems = document.querySelectorAll('.nav .item');
 
-menuItems.forEach(item=>{
+menuItems.forEach(item => {
     item.addEventListener('click', () => {
-        menuItems.forEach(item=> item.classList.remove('active'));
+        menuItems.forEach(item => item.classList.remove('active'));
         item.classList.add('active');
     })
 })
 // Smooth scroll dentro del contenedor .content .wrapper
 document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
 
-    const targetId = link.getAttribute('href');
-    const targetEl = document.querySelector(targetId);
-    const wrapper = document.querySelector('.content .wrapper');
+        const targetId = link.getAttribute('href');
+        const targetEl = document.querySelector(targetId);
+        const wrapper = document.querySelector('.content .wrapper');
 
-    if (!targetEl || !wrapper) return;
+        if (!targetEl || !wrapper) return;
 
-    // Distancia del target dentro del wrapper
-    const top = targetEl.offsetTop;
+        // Distancia del target dentro del wrapper
+        const top = targetEl.offsetTop;
 
-    wrapper.scrollTo({
-      top: top -100, // ajustá si querés un margen arriba
-      behavior: 'smooth'
+        wrapper.scrollTo({
+            top: top - 100, // ajustá si querés un margen arriba
+            behavior: 'smooth'
+        });
     });
-  });
 });
 
 
 const form = document.getElementById("contactForm");
 
 if (form) {
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-    Swal.fire({
-      title: "Enviando...",
-      text: "Por favor, esperá un momento.",
-      allowOutsideClick: false,
-      didOpen: () => Swal.showLoading(),
+        Swal.fire({
+            icon: 'success',
+            title: 'Mensaje enviado',
+            html: `
+                <p style="margin:0">
+                Gracias por contactarme.<br>
+                Te responderé a la brevedad.
+                </p>
+            `,
+            confirmButtonText: 'Perfecto',
+            confirmButtonColor: '#4FC6CE',
+            background: '#111a2c',
+            color: '#DBDBDB',
+            iconColor: '#4FC6CE',
+            showClass: {
+                popup: 'animate__animated animate__fadeInUp'
+            }
+        });
+
+
+        const formData = {
+            name: form.name.value.trim(),
+            email: form.email.value.trim(),
+            subject: form.subject.value.trim(),
+            message: form.message.value.trim(),
+        };
+
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) throw new Error(data.error || "Error al enviar.");
+
+            Swal.fire({
+                icon: "success",
+                title: "¡Mensaje enviado!",
+                text: "Gracias por contactarme. Te respondo a la brevedad.",
+            });
+
+            form.reset();
+        } catch (err) {
+            Swal.fire({
+                icon: "error",
+                title: "No se pudo enviar",
+                text: err.message,
+            });
+        }
     });
-
-    const formData = {
-      name: form.name.value.trim(),
-      email: form.email.value.trim(),
-      subject: form.subject.value.trim(),
-      message: form.message.value.trim(),
-    };
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) throw new Error(data.error || "Error al enviar.");
-
-      Swal.fire({
-        icon: "success",
-        title: "¡Mensaje enviado!",
-        text: "Gracias por contactarme. Te respondo a la brevedad.",
-      });
-
-      form.reset();
-    } catch (err) {
-      Swal.fire({
-        icon: "error",
-        title: "No se pudo enviar",
-        text: err.message,
-      });
-    }
-  });
 }
