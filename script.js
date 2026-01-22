@@ -86,9 +86,19 @@ if (form) {
                 body: JSON.stringify(formData),
             });
 
-            const data = await res.json();
+            const raw = await res.text();
 
-            if (!res.ok) throw new Error(data.error || "Error al enviar.");
+            let data = {};
+            try {
+                data = raw ? JSON.parse(raw) : {};
+            } catch (_) {
+            }
+
+            if (!res.ok) {
+                const msg = data.error || raw?.slice(0, 120) || "Error al enviar.";
+                throw new Error(msg);
+            }
+
 
             Swal.fire({
                 icon: 'success',
