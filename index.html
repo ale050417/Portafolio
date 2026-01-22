@@ -10,6 +10,7 @@
         src="https://cdn.jsdelivr.net/npm/@mariohamann/activity-graph/dist/activity-graph.min.js"></script>
     <title>Mi Portafolio</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -26,37 +27,40 @@
             </div>
             <div class="box nav">
                 <div class="item">
-                    <a href="about">
+                    <a href="#about">
                         <ion-icon name="person-circle-outline"></ion-icon>
-                        <p>about</p>
+                        <p>Sobre mí</p>
                     </a>
                     <div class="divider rtl"></div>
                 </div>
                 <div class="item">
-                    <a href="resume">
+                    <a href="#resume">
                         <ion-icon name="file-tray-full-outline"></ion-icon>
-                        <p>resume</p>
+                        <p>Experiencia</p>
                     </a>
                     <div class="divider rtl"></div>
                 </div>
                 <div class="item">
-                    <a href="projects">
+                    <a href="#projects">
                         <ion-icon name="layers-outline"></ion-icon>
-                        <p>projects</p>
+                        <p>Proyectos</p>
                     </a>
                     <div class="divider rtl"></div>
                 </div>
+                <!--
                 <div class="item">
-                    <a href="blogs">
+                    <a href="#blogs">
                         <ion-icon name="reader-outline"></ion-icon>
                         <p>blogs</p>
                     </a>
                     <div class="divider rtl"></div>
                 </div>
+                -->
+
                 <div class="item">
-                    <a href="contact">
+                    <a href="#contact">
                         <ion-icon name="call-outline"></ion-icon>
-                        <p>contact</p>
+                        <p>Contacto</p>
                     </a>
                 </div>
             </div>
@@ -70,17 +74,19 @@
             <p id="typed" class="colored"></p>
 
             <ul>
-                <li><a href="#"><ion-icon name="logo-github"></ion-icon></a></li>
-                <li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
-                <li><a href="#"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                <li><a href="https://github.com/ale050417"><ion-icon name="logo-github"></ion-icon></a></li>
+                <!--<li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>-->
+                <li><a href="https://www.linkedin.com/in/alexander-ibarra-179238170/"><ion-icon
+                            name="logo-linkedin"></ion-icon></a></li>
             </ul>
 
             <div class="footer">
                 <div class="divider rtl"></div>
                 <table>
                     <tr>
-                        <td><a href="#">my resume<ion-icon name="file-tray-full-outline"></ion-icon></a></td>
-                        <td><a href="#">contact me<ion-icon name="call-outline"></ion-icon></a></td>
+                        <td><a href="assets/Alexander_Ibarra_CV.pdf" download class="cv-btn">Descargar CV<ion-icon
+                                    name="download-outline"></ion-icon></a></td>
+                        <td><a href="#contact">Contáctame <ion-icon name="call-outline"></ion-icon></a></td>
                     </tr>
                 </table>
             </div>
@@ -89,7 +95,7 @@
         <!-------------content------------->
         <div class="box content">
             <div class="wrapper">
-                <h2>Hey <span class="colored">there!</span> manito</h2>
+                <h2 id="about">Hola, bienvenido a mi <span class="colored">portafolio</span> </h2>
                 <div class="divider ltr"></div>
                 <p>Soy un desarrollador en formación con una fuerte pasión por la tecnología. Actualmente me encuentro
                     creando y aprendiendo a desarrollar proyectos que buscan resolver problemas reales y mejorar la
@@ -99,14 +105,28 @@
                 </p>
                 <div class="divider ltr"></div>
 
-                <!-------------skills------------->
+                <!-------------achivaments------------->
+                <section class="achivaments">
+                    <div>
+                        <h3 class="section-title">Actualmente trabajando en:</h3>
+                    </div>
+                    <ul class="progress-list">
+                        <li><ion-icon name="briefcase-outline"></ion-icon> Portafolio personal</li>
+                        <li><ion-icon name="school-outline"></ion-icon> Tesis IAES (Analista de Sistemas)</li>
+                        <li><ion-icon name="calculator-outline"></ion-icon> Sistema de amortización (académico)</li>
+                        <li><ion-icon name="cart-outline"></ion-icon> E-commerce Hefesto</li>
+                    </ul>
+                </section>
+
+
+                <!-------------tecnolgias------------->
                 <div class="divider"></div>
-                <h2>my <span class="colored">Skills</spnan>
+                <h2><span class="colored">Tecnologías </spnan>
                 </h2>
                 <div class="divider ltr"></div>
 
                 <section class="skills">
-                    <h3>Tecnologias</h3>
+                    <h3>Móvil</h3>
                     <section class="skills-grid">
                         <div class="skill">
                             <span class="iconify tech-icon" data-icon="simple-icons:flutter"></span>
@@ -116,13 +136,24 @@
                             <span class="iconify tech-icon" data-icon="simple-icons:dart"></span>
                             <p>Dart</p>
                         </div>
-                        <div class="skill"><span class="iconify tech-icon" data-icon="simple-icons:firebase"></span>
+                    </section>
+
+                    <h3>Backend</h3>
+                    <section class="skills-grid">
+                        <div class="skill">
+                            <span class="iconify tech-icon" data-icon="simple-icons:firebase"></span>
                             <p>Firebase</p>
                         </div>
-                        <div class="skill"><span class="iconify tech-icon" data-icon="simple-icons:arduino"></span>
-                            <p>Arduino</p>
+                        <div class="skill">
+                            <span class="iconify tech-icon" data-icon="mdi:database"></span>
+                            <p>SQL Server</p>
+                        </div>
+                        <div class="skill">
+                            <span class="iconify tech-icon" data-icon="simple-icons:csharp"></span>
+                            <p>C#</p>
                         </div>
                     </section>
+
 
                     <h3>Herramientas</h3>
                     <section class="skills-grid">
@@ -136,6 +167,10 @@
                         <div class="skill"><span class="iconify tech-icon"
                                 data-icon="simple-icons:androidstudio"></span>
                             <p>Android Studio</p>
+                        </div>
+                        <div class="skill">
+                            <span class="iconify tech-icon" data-icon="simple-icons:arduino"></span>
+                            <p>Arduino IDE</p>
                         </div>
                     </section>
 
@@ -156,8 +191,8 @@
                     </section>
                 </section>
                 <!------------- experience ------------->
-
-                <h1>My <span class="colored">experience</span></h1>
+                <div class="divider"></div>
+                <h1 id="resume">Mi <span class="colored">experiencia</span></h1>
                 <div class="divider ltr"></div>
                 <div class="experience">
                     <h2>Escuela de Robótica</h2>
@@ -218,7 +253,8 @@
                 </section>
 
                 <!------------- contributions ------------->
-                <h1>My <span class="colored">contributions</span></h1>
+                <div class="divider"></div>
+                <h1>Mis <span class="colored">Contribuciiones</span></h1>
                 <div class="divider ltr"></div>
 
                 <section class="contribution">
@@ -228,37 +264,111 @@
                 </section>
 
                 <!------------- projects ------------->
-
-                <!-- <h1>my <span class="colored">projects</span></h1>
+                <div class="divider"></div>
+                <h1 id="projects">Mis <span class="colored">proyectos</span></h1>
                 <div class="divider ltr"></div>
 
-                <section class="blogs">
-                    <div class="blog-box">
-                        <img src="img/" alt="">
-                        <div>
-                            <h3></h3>
-                            <p></p>
-                            <span></span>
+                <section class="projects-empty">
+                    <div class="projects-empty__icon">
+                        <ion-icon name="construct-outline"></ion-icon>
+                    </div>
+
+                    <div class="projects-empty__content">
+                        <h2>Proyectos en desarrollo</h2>
+                        <p class="muted">
+                            Me encuentro trabajando activamente en distintos proyectos de software.
+                            Esta sección se actualizará a medida que los proyectos esten terminados.
+                        </p>
+
+
+                    </div>
+                </section>
+                <!-- ------------- contact ------------- -->
+                <div class="divider"></div>
+                <h1 id="contact">Mi <span class="colored">contacto</span></h1>
+                <div class="divider ltr"></div>
+
+                <section class="contact">
+                    <div class="contact-head">
+                        <p class="muted">
+                            Para colaboraciones, feedback o consultas profesionales, podés contactarme a través de los
+                            siguientes medios.
+                        </p>
+                    </div>
+
+                    <div class="contact-grid">
+                        <!-- Card 1 -->
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <ion-icon name="mail-outline"></ion-icon>
+                            </div>
+                            <div class="contact-info">
+                                <h3>Email</h3>
+                                <p class="muted">Ideal para propuestas o consultas formales.</p>
+                                <a class="contact-link"
+                                    href="https://mail.google.com/mail/?view=cm&to=alexezequiel2001@gmail.com"
+                                    target="_blank" rel="noopener">
+                                    alexezequiel2001@gmail.com
+                                </a>
+                                <p class="muted">Respuesta en 24–48 hs.</p>
+                            </div>
+                        </div>
+
+
+                        <!-- Card 2 -->
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <ion-icon name="logo-linkedin"></ion-icon>
+                            </div>
+                            <div class="contact-info">
+                                <h3>LinkedIn</h3>
+                                <p class="muted">Conectemos y sigamos el contacto profesional.</p>
+                                <a class="contact-link" href="https://www.linkedin.com/in/alexander-ibarra-179238170/"
+                                    target="_blank" rel="noopener">Ver perfil</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <ion-icon name="logo-github"></ion-icon>
+                            </div>
+                            <div class="contact-info">
+                                <h3>GitHub</h3>
+                                <p class="muted">Código y avances de proyectos (cuando los publique).</p>
+                                <a class="contact-link" href="https://github.com/ale050417" target="_blank"
+                                    rel="noopener">Ver repositorios</a>
+                            </div>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+                            </div>
+                            <div class="contact-info">
+                                <h3>Formulario de contacto</h3>
+                                <p class="muted">Completá el formulario para establecer contacto.</p>
+
+                                <form id="contactForm" class="contact-form">
+                                    <div class="row">
+                                        <input type="text" name="name" placeholder="Tu nombre" required>
+                                        <input type="email" name="email" placeholder="Tu email" required>
+                                    </div>
+                                    <input type="text" name="subject" placeholder="Asunto (opcional)">
+                                    <textarea name="message" rows="4" placeholder="Tu mensaje..." required></textarea>
+
+                                    <!-- anti-spam simple (campo trampa invisible) -->
+                                    <input type="text" name="website" autocomplete="off" tabindex="-1"
+                                        style="position:absolute; left:-9999px; opacity:0; height:0; width:0;">
+
+
+                                    <button class="btn-primary" type="submit">
+                                        Enviar mensaje <ion-icon name="send-outline"></ion-icon>
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </section>
-            -->
-                <!-------------achivaments------------->
-                <section class="achivaments">
-                    <div>
-                        <h3 class="section-title">Actualmente trabajando en:</h3>
-                    </div>
-                    <ul class="progress-list">
-                        <li><ion-icon name="briefcase-outline"></ion-icon> Portafolio personal</li>
-                        <li><ion-icon name="school-outline"></ion-icon> Tesis IAES (Analista de Sistemas)</li>
-                        <li><ion-icon name="calculator-outline"></ion-icon> Sistema de amortización (académico)</li>
-                        <li><ion-icon name="cart-outline"></ion-icon> E-commerce Hefesto</li>
-                    </ul>
-                </section>
-
-
-
-
             </div>
         </div>
     </div>
