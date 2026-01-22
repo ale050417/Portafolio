@@ -8,6 +8,22 @@ var typed = new Typed("#typed", {
     loop: true
 });
 
+//funcion para claro o oscuro de los mensajes
+function getSwalTheme() {
+    const isLight = document.body.classList.contains('light');
+
+    return {
+        background: isLight ? '#ffffff' : '#111a2c',
+        color: isLight ? '#1D3A41' : '#DBDBDB',
+        confirmButtonColor: '#4FC6CE',
+        customClass: {
+            popup: 'swal-rounded'
+        }
+    };
+}
+
+
+
 //tema
 function theme() {
     const darkBtn = document.getElementById('darkBtn');
@@ -66,22 +82,13 @@ if (form) {
         e.preventDefault();
 
         Swal.fire({
-            title: 'Enviando mensaje',
-            html: `
-                <p style="margin:0">
-                Procesando tu consulta…
-                </p>
-            `,
+            title: 'Enviando...',
+            text: 'Por favor, esperá un momento.',
             allowOutsideClick: false,
-            background: '#111a2c',
-            color: '#DBDBDB',
-            customClass: {
-                popup: 'swal-rounded'
-            },
-            didOpen: () => {
-                Swal.showLoading();
-            }
+            didOpen: () => Swal.showLoading(),
+            ...getSwalTheme()
         });
+
 
 
         const formData = {
@@ -120,19 +127,12 @@ if (form) {
                     Gracias por contactarme.<br>
                     Te responderé a la brevedad.
                     </p>
-                    `,
-                confirmButtonText: 'Perfecto',
-                confirmButtonColor: '#4FC6CE',
-                background: '#111a2c',
-                color: '#DBDBDB',
+                `,
                 iconColor: '#4FC6CE',
-                customClass: {
-                    popup: 'swal-rounded'
-                },
-                showClass: {
-                    popup: 'animate__animated animate__fadeInUp'
-                }
+                confirmButtonText: 'Perfecto',
+                ...getSwalTheme()
             });
+
 
             form.reset();
         } catch (err) {
@@ -144,16 +144,10 @@ if (form) {
                     ${err.message || 'Ocurrió un problema al enviar el mensaje.'}
                     </p>
                 `,
-                confirmButtonText: 'Entendido',
-                confirmButtonColor: '#4FC6CE',
-                background: '#111a2c',
-                color: '#DBDBDB',
                 iconColor: '#ff6b6b',
-                customClass: {
-                    popup: 'swal-rounded'
-                }
+                confirmButtonText: 'Entendido',
+                ...getSwalTheme()
             });
-
         }
     });
 }

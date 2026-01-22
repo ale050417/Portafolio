@@ -575,6 +575,10 @@ body.light .contribution activity-graph{
   box-shadow: 0 20px 40px rgba(0,0,0,.45);
 }
 
+.swal2-loader {
+  border-color: #4FC6CE transparent #4FC6CE transparent !important;
+}
+
 
 
 
