@@ -151,3 +151,30 @@ if (form) {
         }
     });
 }
+
+//grafico de git
+async function loadGithubContributions() {
+  try {
+    const graph = document.getElementById("activityGraph");
+    if (!graph) return;
+
+    const res = await fetch("/api/github-contributions");
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.error || "No se pudo cargar contribuciones.");
+
+    // Ajustes del gráfico
+    if (data.rangeStart) graph.setAttribute("range-start", data.rangeStart);
+    if (data.rangeEnd) graph.setAttribute("range-end", data.rangeEnd);
+
+    // IMPORTANTÍSIMO: esto es lo que dibuja los cuadraditos
+    graph.setAttribute("activity-data", data.activityData);
+
+    // Niveles (como capeamos a 10, tiene sentido esto)
+    graph.setAttribute("activity-levels", "0,1,2,4,7");
+  } catch (e) {
+    console.log("GitHub contributions error:", e.message);
+  }
+}
+
+loadGithubContributions();
