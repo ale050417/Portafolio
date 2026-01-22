@@ -498,7 +498,7 @@ body.light .contribution activity-graph{
 
 
 
-/* ---------- Contact ---------- */
+/* ---------- proyecto ---------- */
 
 .projects-empty{
   background: var(--accent-03);
@@ -567,6 +567,13 @@ body.light .contribution activity-graph{
 }
 
 
+
+
+/*--------------------- recuadro de mensaje --------------------------*/
+.swal-rounded {
+  border-radius: 20px !important;
+  box-shadow: 0 20px 40px rgba(0,0,0,.45);
+}
 
 
 

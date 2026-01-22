@@ -66,11 +66,23 @@ if (form) {
         e.preventDefault();
 
         Swal.fire({
-            title: "Enviando...",
-            text: "Por favor, esperá un momento.",
+            title: 'Enviando mensaje',
+            html: `
+                <p style="margin:0">
+                Procesando tu consulta…
+                </p>
+            `,
             allowOutsideClick: false,
-            didOpen: () => Swal.showLoading(),
+            background: '#111a2c',
+            color: '#DBDBDB',
+            customClass: {
+                popup: 'swal-rounded'
+            },
+            didOpen: () => {
+                Swal.showLoading();
+            }
         });
+
 
         const formData = {
             name: form.name.value.trim(),
@@ -114,6 +126,9 @@ if (form) {
                 background: '#111a2c',
                 color: '#DBDBDB',
                 iconColor: '#4FC6CE',
+                customClass: {
+                    popup: 'swal-rounded'
+                },
                 showClass: {
                     popup: 'animate__animated animate__fadeInUp'
                 }
@@ -122,10 +137,23 @@ if (form) {
             form.reset();
         } catch (err) {
             Swal.fire({
-                icon: "error",
-                title: "No se pudo enviar",
-                text: err.message,
+                icon: 'error',
+                title: 'No se pudo enviar',
+                html: `
+                    <p style="margin:0">
+                    ${err.message || 'Ocurrió un problema al enviar el mensaje.'}
+                    </p>
+                `,
+                confirmButtonText: 'Entendido',
+                confirmButtonColor: '#4FC6CE',
+                background: '#111a2c',
+                color: '#DBDBDB',
+                iconColor: '#ff6b6b',
+                customClass: {
+                    popup: 'swal-rounded'
+                }
             });
+
         }
     });
 }
