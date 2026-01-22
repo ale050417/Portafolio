@@ -150,24 +150,27 @@ if (form) {
 
 //grafico de git
 async function loadContributions() {
-  const graph = document.getElementById("activityGraph");
-  if (!graph) return;
+    const graph = document.getElementById("activityGraph");
+    if (!graph) return;
 
-  try {
-    const res = await fetch("/api/github", { cache: "no-store" });
-    const data = await res.json();
+    try {
+        const res = await fetch("/api/github", { cache: "no-store" });
+        const data = await res.json();
 
-    if (!res.ok) throw new Error(data.error || "Error cargando contribuciones");
+        if (!res.ok) throw new Error(data.error || "Error cargando contribuciones");
 
-    // Cargar datos en el componente
-    if (data.rangeStart) graph.setAttribute("range-start", data.rangeStart);
-    if (data.rangeEnd) graph.setAttribute("range-end", data.rangeEnd);
-    graph.setAttribute("activity-data", data.activityData || "");
+        // Cargar datos en el componente
+        if (data.rangeStart) graph.setAttribute("range-start", data.rangeStart);
+        if (data.rangeEnd) graph.setAttribute("range-end", data.rangeEnd);
+        graph.setAttribute("range-start", data.rangeStart || "2026-01-01");
+        graph.setAttribute("range-end", data.rangeEnd || "2026-12-31");
+        graph.setAttribute("activity-data", data.activityData || "");
 
-  } catch (err) {
-    console.error("Contributions:", err.message);
-    // opcional: mostrar algo en UI si falla
-  }
+
+    } catch (err) {
+        console.error("Contributions:", err.message);
+        // opcional: mostrar algo en UI si falla
+    }
 }
 
 document.addEventListener("DOMContentLoaded", loadContributions);

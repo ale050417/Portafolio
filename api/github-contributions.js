@@ -1,3 +1,4 @@
+
 export default async function handler(req, res) {
   try {
     const username = process.env.GITHUB_USERNAME;
@@ -7,10 +8,14 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: "Falta GITHUB_USERNAME en Vercel." });
     }
 
+    // SOLO 2026
+    const from = "2026-01-01T00:00:00Z";
+    const to   = "2026-12-31T23:59:59Z";
+
     const query = `
-      query ($login: String!) {
+      query ($login: String!, $from: DateTime!, $to: DateTime!) {
         user(login: $login) {
-          contributionsCollection {
+          contributionsCollection(from: $from, to: $to, includePrivateContributions: true) {
             contributionCalendar {
               totalContributions
               weeks {
@@ -31,7 +36,10 @@ export default async function handler(req, res) {
         "Content-Type": "application/json",
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
-      body: JSON.stringify({ query, variables: { login: username } }),
+      body: JSON.stringify({
+        query,
+        variables: { login: username, from, to },
+      }),
     });
 
     const data = await ghRes.json();
@@ -46,8 +54,6 @@ export default async function handler(req, res) {
     const weeks =
       data.user.contributionsCollection.contributionCalendar.weeks || [];
 
-    // activity-graph usa "activity-data" como lista de fechas repetidas
-    // Para no explotar el tamaño, capeo a 10 repeticiones por día
     const CAP = 10;
     const dates = [];
 
@@ -58,15 +64,10 @@ export default async function handler(req, res) {
       }
     }
 
-    // Rango (último año aprox)
-    const allDays = weeks.flatMap(w => w.contributionDays);
-    const rangeStart = allDays[0]?.date;
-    const rangeEnd = allDays[allDays.length - 1]?.date;
-
     return res.status(200).json({
       activityData: dates.join(","),
-      rangeStart,
-      rangeEnd,
+      rangeStart: "2026-01-01",
+      rangeEnd: "2026-12-31",
       cap: CAP,
       total:
         data.user.contributionsCollection.contributionCalendar.totalContributions,
