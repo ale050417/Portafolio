@@ -36,15 +36,30 @@ export default async function handler(req, res) {
           ? `Portfolio: ${subject.trim()}`
           : `Portfolio: Nuevo mensaje de ${name}`,
         html: `
-          <div style="font-family: Arial, sans-serif; line-height:1.5">
-            <h2>Nuevo mensaje desde tu portfolio</h2>
-            <p><b>Nombre:</b> ${escapeHtml(name)}</p>
-            <p><b>Email:</b> ${escapeHtml(email)}</p>
-            <p><b>Asunto:</b> ${escapeHtml(subject || "-")}</p>
-            <hr />
-            <p style="white-space:pre-wrap"><b>Mensaje:</b><br/>${escapeHtml(message)}</p>
+        <div style="background:#0b1220;padding:24px">
+          <div style="max-width:640px;margin:0 auto;background:#111a2c;border:1px solid rgba(79,198,206,.35);border-radius:14px;overflow:hidden">
+            <div style="padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.08)">
+              <h2 style="margin:0;color:#DBDBDB;font-family:Arial,sans-serif">
+                Nuevo mensaje desde tu portfolio
+              </h2>
+              <p style="margin:6px 0 0;color:#98B1BA;font-family:Arial,sans-serif;font-size:13px">
+                ${new Date().toLocaleString("es-AR")}
+              </p>
+            </div>
+
+            <div style="padding:18px 20px;font-family:Arial,sans-serif;color:#DBDBDB;line-height:1.5">
+              <p style="margin:0 0 10px"><b style="color:#4FC6CE">Nombre:</b> ${escapeHtml(name)}</p>
+              <p style="margin:0 0 10px"><b style="color:#4FC6CE">Email:</b> ${escapeHtml(email)}</p>
+              <p style="margin:0 0 14px"><b style="color:#4FC6CE">Asunto:</b> ${escapeHtml(subject || "-")}</p>
+
+              <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px">
+                <b style="color:#4FC6CE">Mensaje</b>
+                <div style="margin-top:10px;white-space:pre-wrap;color:#DBDBDB">${escapeHtml(message)}</div>
+              </div>
+            </div>
           </div>
-        `,
+        </div>
+      `,
       }),
     });
 
@@ -70,4 +85,10 @@ function escapeHtml(str) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+const { name, email, subject, message, website } = req.body || {};
+
+// Si el bot llena el honeypot, respondemos OK sin enviar nada
+if (website) {
+  return res.status(200).json({ message: "OK" });
 }

@@ -66,24 +66,11 @@ if (form) {
         e.preventDefault();
 
         Swal.fire({
-            icon: 'success',
-            title: 'Mensaje enviado',
-            html: `
-                <p style="margin:0">
-                Gracias por contactarme.<br>
-                Te responderé a la brevedad.
-                </p>
-            `,
-            confirmButtonText: 'Perfecto',
-            confirmButtonColor: '#4FC6CE',
-            background: '#111a2c',
-            color: '#DBDBDB',
-            iconColor: '#4FC6CE',
-            showClass: {
-                popup: 'animate__animated animate__fadeInUp'
-            }
+            title: "Enviando...",
+            text: "Por favor, esperá un momento.",
+            allowOutsideClick: false,
+            didOpen: () => Swal.showLoading(),
         });
-
 
         const formData = {
             name: form.name.value.trim(),
@@ -104,9 +91,22 @@ if (form) {
             if (!res.ok) throw new Error(data.error || "Error al enviar.");
 
             Swal.fire({
-                icon: "success",
-                title: "¡Mensaje enviado!",
-                text: "Gracias por contactarme. Te respondo a la brevedad.",
+                icon: 'success',
+                title: 'Mensaje enviado',
+                html: `
+                    <p style="margin:0">
+                    Gracias por contactarme.<br>
+                    Te responderé a la brevedad.
+                    </p>
+                    `,
+                confirmButtonText: 'Perfecto',
+                confirmButtonColor: '#4FC6CE',
+                background: '#111a2c',
+                color: '#DBDBDB',
+                iconColor: '#4FC6CE',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInUp'
+                }
             });
 
             form.reset();
