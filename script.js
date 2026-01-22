@@ -1,4 +1,4 @@
-// typed animation
+//animacion
 var typed = new Typed("#typed", {
     strings: ["Junior Software Developer", "Desarrollo web y móvil", "Aprender · Practicar · Construir"],
     typeSpeed: 50,
@@ -8,7 +8,7 @@ var typed = new Typed("#typed", {
     loop: true
 });
 
-//theme
+//tema
 function theme() {
     const darkBtn = document.getElementById('darkBtn');
     const lightBtn = document.getElementById('lightBtn');
@@ -28,7 +28,7 @@ const graph = document.getElementById("activityGraph");
 
 const today = new Date().toISOString().split("T")[0];
 
-//menu toogle
+//menu
 const menuItems = document.querySelectorAll('.nav .item');
 
 menuItems.forEach(item => {
@@ -52,7 +52,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         const top = targetEl.offsetTop;
 
         wrapper.scrollTo({
-            top: top - 100, // ajustá si querés un margen arriba
+            top: top - 100, // si queremos margen arriba hay que ajustar
             behavior: 'smooth'
         });
     });
