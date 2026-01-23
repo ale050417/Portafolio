@@ -158,10 +158,11 @@ async function loadContributions() {
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Error cargando contribuciones");
 
-        // 👇 MOSTRAR SOLO ENE 2026 → JUL 2026
+        // ✅ Año completo fijo (2026)
         graph.setAttribute("range-start", "2026-01-01");
-        graph.setAttribute("range-end", "2026-07-31");
+        graph.setAttribute("range-end", "2026-12-31");
 
+        // ✅ Cargar fechas
         graph.setAttribute("activity-data", data.activityData || "");
     } catch (err) {
         console.error("Contributions:", err.message);

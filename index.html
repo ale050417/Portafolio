@@ -10,7 +10,10 @@
         src="https://cdn.jsdelivr.net/npm/@mariohamann/activity-graph/dist/activity-graph.min.js"></script>
     <title>Mi Portafolio</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="api/contact.js">
+    <link rel="stylesheet" href="api/github.js">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -258,8 +261,9 @@
                 <div class="divider ltr"></div>
 
                 <section class="contribution">
-                    <activity-graph id="activityGraph" activity-levels="0,1,3,6,10"></activity-graph>
-
+                    <activity-graph id="activityGraph" range-start="2026-01-01" range-end="2026-12-31"
+                        activity-levels="0,1,3,6,10">
+                    </activity-graph>
                 </section>
 
 
