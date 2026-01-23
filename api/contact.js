@@ -1,95 +1,80 @@
+// api/github.js
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method Not Allowed" });
-  }
-
   try {
-    const { name, email, subject, message, website } = req.body || {};
+    const username = process.env.GITHUB_USERNAME;
+    const token = process.env.GITHUB_TOKEN;
 
-    // antispam
-    if (website) {
-      return res.status(200).json({ message: "OK" });
+    if (!username) {
+      return res.status(500).json({ error: "Falta GITHUB_USERNAME en Vercel." });
     }
 
-    // Validación simple
-    if (!name || !email || !message) {
-      return res.status(400).json({ error: "Faltan campos obligatorios." });
-    }
+    // SOLO 2026
+    const from = "2026-01-01T00:00:00Z";
+    const to = "2026-12-31T23:59:59Z";
 
-    const RESEND_API_KEY = process.env.RESEND_API_KEY;
-    const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL;
+    const query = `
+      query ($login: String!, $from: DateTime!, $to: DateTime!) {
+        user(login: $login) {
+          contributionsCollection(from: $from, to: $to) {
+            contributionCalendar {
+              totalContributions
+              weeks {
+                contributionDays {
+                  date
+                  contributionCount
+                }
+              }
+            }
+          }
+        }
+      }
+    `;
 
-    if (!RESEND_API_KEY || !CONTACT_TO_EMAIL) {
-      return res
-        .status(500)
-        .json({ error: "Faltan variables de entorno en Vercel." });
-    }
-
-    const resp = await fetch("https://api.resend.com/emails", {
+    const ghRes = await fetch("https://api.github.com/graphql", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${RESEND_API_KEY}`,
         "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
       body: JSON.stringify({
-        from: "Portfolio <onboarding@resend.dev>",
-        to: [CONTACT_TO_EMAIL],
-        reply_to: email,
-        subject: subject?.trim()
-          ? `Portfolio: ${subject.trim()}`
-          : `Portfolio: Nuevo mensaje de ${name}`,
-        html: `
-          <div style="background:#0b1220;padding:24px">
-            <div style="max-width:640px;margin:0 auto;background:#111a2c;border:1px solid rgba(79,198,206,.35);border-radius:14px;overflow:hidden">
-              <div style="padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.08)">
-                <h2 style="margin:0;color:#DBDBDB;font-family:Arial,sans-serif">
-                  Nuevo mensaje desde tu portfolio
-                </h2>
-                <p style="margin:6px 0 0;color:#98B1BA;font-family:Arial,sans-serif;font-size:13px">
-                  ${new Date().toISOString()}
-                </p>
-              </div>
-
-              <div style="padding:18px 20px;font-family:Arial,sans-serif;color:#DBDBDB;line-height:1.5">
-                <p style="margin:0 0 10px"><b style="color:#4FC6CE">Nombre:</b> ${escapeHtml(name)}</p>
-                <p style="margin:0 0 10px"><b style="color:#4FC6CE">Email:</b> ${escapeHtml(email)}</p>
-                <p style="margin:0 0 14px"><b style="color:#4FC6CE">Asunto:</b> ${escapeHtml(subject || "-")}</p>
-
-                <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px">
-                  <b style="color:#4FC6CE">Mensaje</b>
-                  <div style="margin-top:10px;white-space:pre-wrap;color:#DBDBDB">${escapeHtml(message)}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        `,
+        query,
+        variables: { login: username, from, to },
       }),
     });
 
-    const raw = await resp.text();
-
+    const raw = await ghRes.text();
     let data = {};
-    try {
-      data = raw ? JSON.parse(raw) : {};
-    } catch (_) {}
+    try { data = raw ? JSON.parse(raw) : {}; } catch {}
 
-    if (!resp.ok) {
+    if (!ghRes.ok || data.errors) {
       return res.status(500).json({
-        error: data?.message || raw || "No se pudo enviar el mensaje.",
+        error: data?.errors?.[0]?.message || "Error consultando GitHub GraphQL",
+        details: data,
       });
     }
 
-    return res.status(200).json({ message: "Mensaje enviado correctamente." });
-  } catch (err) {
-    return res.status(500).json({ error: "Error inesperado al enviar." });
-  }
-}
+    const weeks =
+      data?.data?.user?.contributionsCollection?.contributionCalendar?.weeks || [];
 
-function escapeHtml(str) {
-  return String(str)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+    const CAP = 10;
+    const dates = [];
+
+    for (const w of weeks) {
+      for (const d of w.contributionDays) {
+        const repeat = Math.min(d.contributionCount || 0, CAP);
+        for (let i = 0; i < repeat; i++) dates.push(d.date);
+      }
+    }
+
+    return res.status(200).json({
+      activityData: dates.join(","),
+      rangeStart: "2026-01-01",
+      rangeEnd: "2026-12-31",
+      cap: CAP,
+      total:
+        data.data.user.contributionsCollection.contributionCalendar.totalContributions,
+    });
+  } catch (err) {
+    return res.status(500).json({ error: "Error inesperado.", detail: String(err) });
+  }
 }
