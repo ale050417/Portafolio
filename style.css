@@ -804,29 +804,45 @@ body.light .contribution activity-graph {
         grid-template-columns: 1fr;
         max-width: 500px;
         padding: 20px;
-        padding-top: 50px;
+        padding-top: 100px;
     }
+/* navbar flotante arriba */
+  .navbar{
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
 
-    .navbar {
-        display: -ms-inline-grid;
-        grid-template-columns: 85px 1fr;
-    }
+    width: min(92vw, 520px);
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 10px;
+  }
 
-    .nav {
-        display: inline-grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        padding: 5px;
-    }
+  /* el bloque de iconos */
+  .navbar .nav{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    padding: 10px 12px;
+    border-radius: 18px;
+  }
 
-    .nav .divider,
-    .nav p {
-        display: none;
-    }
+  /* botón tema (sol/luna) */
+  .navbar .theme{
+    border-radius: 18px;
+  }
 
-    .navbar>div {
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
-            rgba(0, 0, 0, 0.06) 0px 0px 0px 1px
-    }
+  /* ocultar textos y divisores */
+  .navbar .nav p,
+  .navbar .divider{
+    display: none;
+  }
+
+  .navbar ion-icon{
+    font-size: 22px;
+  }
 
     .achivaments {
         grid-template-columns: 1fr;
