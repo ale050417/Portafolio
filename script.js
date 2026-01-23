@@ -156,21 +156,17 @@ async function loadContributions() {
     try {
         const res = await fetch("/api/github", { cache: "no-store" });
         const data = await res.json();
-
         if (!res.ok) throw new Error(data.error || "Error cargando contribuciones");
 
-        // Cargar datos en el componente
-        if (data.rangeStart) graph.setAttribute("range-start", data.rangeStart);
-        if (data.rangeEnd) graph.setAttribute("range-end", data.rangeEnd);
-        graph.setAttribute("range-start", data.rangeStart || "2026-01-01");
-        graph.setAttribute("range-end", data.rangeEnd || "2026-12-31");
+        // 👇 MOSTRAR SOLO ENE 2026 → JUL 2026
+        graph.setAttribute("range-start", "2026-01-01");
+        graph.setAttribute("range-end", "2026-07-31");
+
         graph.setAttribute("activity-data", data.activityData || "");
-
-
     } catch (err) {
         console.error("Contributions:", err.message);
-        // opcional: mostrar algo en UI si falla
     }
 }
+
 
 document.addEventListener("DOMContentLoaded", loadContributions);
