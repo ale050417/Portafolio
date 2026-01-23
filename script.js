@@ -49,26 +49,30 @@ menuItems.forEach(item => {
         item.classList.add('active');
     })
 })
-// Smooth scroll dentro del contenedor .content .wrapper
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
+// Smooth scroll dentro del contenedor .content .wrapper (funciona bien en mobile/tablet)
+document.querySelectorAll('.nav a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
 
-        const targetId = link.getAttribute('href');
-        const targetEl = document.querySelector(targetId);
-        const wrapper = document.querySelector('.content .wrapper');
+    const targetId = link.getAttribute('href');
+    const targetEl = document.querySelector(targetId);
+    const wrapper = document.querySelector('.content .wrapper');
 
-        if (!targetEl || !wrapper) return;
+    if (!targetEl || !wrapper) return;
 
-        // Distancia del target dentro del wrapper
-        const top = targetEl.offsetTop;
+    // Posición del target relativa al wrapper (robusta para responsive)
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const targetRect = targetEl.getBoundingClientRect();
 
-        wrapper.scrollTo({
-            top: top - 100, // si queremos margen arriba hay que ajustar
-            behavior: 'smooth'
-        });
+    const top = (targetRect.top - wrapperRect.top) + wrapper.scrollTop;
+
+    wrapper.scrollTo({
+      top: Math.max(top - 15, 0), // margen superior
+      behavior: 'smooth'
     });
+  });
 });
+
 
 
 const form = document.getElementById("contactForm");

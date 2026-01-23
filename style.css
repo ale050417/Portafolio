@@ -358,7 +358,7 @@ body.light {
 
 .contribution activity-graph {
     display: block;
-    width: 100%;
+    width: 105%;
     padding: 10px 20px;
     overflow-x: auto;
     /* scroll horizontal */
@@ -376,7 +376,7 @@ body.light {
 
 .contribution figure,
 .contribution table {
-    max-width: 100%;
+    max-width: 96%;
 }
 
 body.light .contribution activity-graph {
@@ -616,33 +616,187 @@ body.light .contribution activity-graph {
 
 
 }
+/* =======================
+   TABLET (768px - 1023px)
+   ======================= */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
 
-/* Tablet */
-@media screen and (width >=768px) and (width <=1023px) {
-    .container {
-        grid-template-columns: 85px 1fr;
-        max-width: 650px;
-    }
+  /* Contenedor general: 2 columnas (navbar + resto) */
+  .container {
+    grid-template-columns: 95px 1fr;
+    gap: 14px;
+    max-width: 900px;
+    padding: 30px;
+    padding-top: 60px;
+  }
 
-    .content {
-        grid-column-start: 2;
-        grid-column-end: 4;
-    }
+  /* Navbar: fija, prolija y con ancho consistente */
+  .navbar {
+    top: 20px;
+  }
 
-    .achivaments {
-        grid-template-columns: 1fr 1fr;
-    }
+  .navbar > .box {
+    border-radius: 18px;
+  }
 
-    .skills-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .navbar > div {
+    padding: 18px 8px;
+  }
 
-    .contact-grid {
-        grid-template-columns: 1fr;
-        /* todo uno abajo del otro */
-        gap: 16px;
-    }
+  .navbar ion-icon {
+    font-size: 28px;
+  }
+
+  .navbar .item p {
+    font-size: 11px;
+    letter-spacing: .8px;
+  }
+
+  /* Profile: ocupa toda la segunda columna (arriba) */
+  .profile {
+    grid-column: 2 / -1;
+    grid-row: auto;
+    border-radius: 18px;
+    font-size: 18px;
+  }
+
+  .profile .header {
+    border-radius: 18px 18px 0 0;
+    max-height: 320px;
+    object-fit: cover;
+  }
+
+  .profile .img {
+    width: 120px;
+    margin: -55px auto 0;
+    border-width: 7px;
+    border-radius: 28px;
+  }
+
+  .profile ul {
+    margin: 20px 0 50px 0;
+  }
+
+  /* Footer del profile: no sticky en tablet (evita superposición rara) */
+  .profile .footer {
+    position: static;
+    top: auto;
+  }
+
+  .profile table td a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  /* Content: debajo del profile, misma columna */
+  .content {
+    grid-column: 2 / -1; /* ✅ importante (en tablet no existe col 4) */
+    border-radius: 18px;
+    padding: 18px 14px 18px 18px;
+  }
+
+  .content .wrapper {
+    max-height: calc(100vh - 170px); /* mantiene scroll usable */
+    padding-right: 10px;
+  }
+
+  .content h1,
+  .content h2 {
+    font-size: 1.7em;
+  }
+
+  .content p {
+    font-size: 17px;
+  }
+
+  /* Achivaments list */
+  .progress-list li {
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
+
+  /* Skills */
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .skill {
+    padding: 18px 14px;
+    border-radius: 12px;
+  }
+
+  .tech-icon {
+    font-size: 30px;
+  }
+
+  /* Experience */
+  .experience p {
+    font-size: 16px;
+  }
+
+  /* Contributions (activity-graph) */
+  .contribution {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  /* Esto es CLAVE: que el gráfico no rompa y permita scroll horizontal */
+  .contribution activity-graph {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    padding: 12px 14px;
+  }
+
+  /* Asegura scroll si el componente es más ancho */
+  .contribution > div,
+  .contribution figure {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  /* Proyectos: card vacío */
+  .projects-empty {
+    gap: 12px;
+    border-radius: 14px;
+  }
+
+  /* Contact: 1 columna para que no se aplaste */
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .contact-card {
+    border-radius: 14px;
+    padding: 14px;
+  }
+
+  /* Form */
+  .contact-form .row {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    border-radius: 12px;
+  }
+
+  .btn-primary {
+    border-radius: 12px;
+  }
+
+  /* Dividers un poco más suaves */
+  .divider {
+    margin: 12px 0;
+  }
 }
+
 
 /* Mobile */
 @media screen and (width <=769px) {
@@ -720,6 +874,10 @@ body.light .contribution activity-graph {
     .contribution activity-graph figure {
         min-width: 720px;
         /* probá 650 / 720 / 800 según gusto */
+    }
+    .profile .footer{
+        position: static;
+        top: auto;
     }
 }
 
