@@ -36,7 +36,7 @@ body.light {
 
 .container {
     display: grid;
-    gap: 5px;
+    gap: 15px;
     max-width: 1300px;
     padding: 80px;
     margin: 0 auto;

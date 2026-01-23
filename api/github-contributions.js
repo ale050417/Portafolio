@@ -67,7 +67,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       activityData: dates.join(","),
       rangeStart: "2026-01-01",
-      rangeEnd: "2026-12-31",
+      rangeEnd: "2026-06-31",
       cap: CAP,
       total:
         data.user.contributionsCollection.contributionCalendar.totalContributions,
