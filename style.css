@@ -491,7 +491,7 @@ body.light .contribution activity-graph {
     border: 3px solid var(--accent-04);
     border-radius: 14px;
     padding: 14px;
-    display: grid;
+    display: flex;
     gap: 10px;
     align-items: flex-start;
     transition: border-color .4s, transform .2s;
@@ -1026,6 +1026,9 @@ body.light .contribution activity-graph {
 
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .contact-form{
+    display: grid;
   }
 
   .contact-grid {
