@@ -899,8 +899,10 @@ body.light .contribution activity-graph {
         display: grid;
         gap: 10px;
         position: fixed;
-        top: 14px;
-        left: 14px;
+        bottom: 14px;
+        right: 14px;
+        left: auto;
+        top: auto;
         z-index: 2200;
     }
 
@@ -938,8 +940,6 @@ body.light .contribution activity-graph {
 .mobile-menu {
     display: none;
 }
-
-@media screen and (width <=769px) {
     html {
         scroll-padding-top: 20px;
 
@@ -969,18 +969,20 @@ body.light .contribution activity-graph {
 
         /* El panel SIEMPRE arriba y clickeable */
         .mobile-menu-panel {
-            position: absolute;
-            top: 14px;
-            left: 80px;
+            position: fixed;
+            top: auto;
+            left: auto;
             width: min(78vw, 320px);
             padding: 14px;
             border-radius: 22px;
-            transform: translateY(-6px);
+            transform: translateY(10px);
             transition: transform .18s;
             z-index: 1;
             /* 👈 arriba del backdrop */
             pointer-events: auto;
             /* 👈 permite clicks */
+            right: 14px;
+    bottom: 78px;  /* ✅ se abre arriba de los botones */
         }
 
         .mobile-menu.open .mobile-menu-panel {
@@ -1080,25 +1082,24 @@ body.light .contribution activity-graph {
         }
     }
 
+
+
+/* separaciones */
+
+.divider {
+    height: 2px;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.ltr {
+    background: radial-gradient(ellipse at left, var(--accent-02) -70%, transparent 80%);
 }
 
 
-    /* separaciones */
-
-    .divider {
-        height: 2px;
-        width: 100%;
-        margin: 10px 0;
-    }
-
-    .ltr {
-        background: radial-gradient(ellipse at left, var(--accent-02) -70%, transparent 80%);
-    }
-
-
-    .rtl {
-        background: radial-gradient(ellipse at right, var(--accent-02) -70%, transparent 80%);
-    }
+.rtl {
+    background: radial-gradient(ellipse at right, var(--accent-02) -70%, transparent 80%);
+}
 
 /* sin celeste) */
 body.light .fab,
