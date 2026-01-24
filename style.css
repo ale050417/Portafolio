@@ -1099,6 +1099,24 @@ body.light .contribution activity-graph {
 
 .rtl {
     background: radial-gradient(ellipse at right, var(--accent-02) -70%, transparent 80%);
+
+
+    /* separaciones */
+
+    .divider {
+        height: 2px;
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .ltr {
+        background: radial-gradient(ellipse at left, var(--accent-02) -70%, transparent 80%);
+    }
+
+
+    .rtl {
+        background: radial-gradient(ellipse at right, var(--accent-02) -70%, transparent 80%);
+    }
 }
 
 /* sin celeste) */
