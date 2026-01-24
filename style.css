@@ -538,12 +538,15 @@ body.light .contribution activity-graph {
     margin-top: 10px;
     display: grid;
     gap: 10px;
+     justify-items: center;
 }
 
 .contact-form .row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
+    width: 100%;
+  max-width: 420px;
 }
 
 .contact-form input,
@@ -556,6 +559,8 @@ body.light .contribution activity-graph {
     padding: 10px 12px;
     outline: none;
     transition: border-color .4s;
+     max-width: 420px; 
+     resize: none;
 }
 
 .contact-form input:focus,
@@ -935,11 +940,7 @@ body.light .contribution activity-graph {
     }
 
     /* ========================Panel  ========================= */
-    .mobile-menu {
-        display: none;
-    }
-
-    @media screen and (width <=769px) {
+  
         html {
             scroll-padding-top: 20px;
         }
@@ -1081,7 +1082,18 @@ body.light .contribution activity-graph {
             position: static;
             top: auto;
         }
-    }
+        /* ✅ cuando el menú NO está abierto, el panel NO existe para clicks */
+  .mobile-menu:not(.open) .mobile-menu-panel,
+  .mobile-menu:not(.open) .mobile-backdrop{
+    display: none !important;
+  }
+
+  /* ✅ cuando está abierto, sí se muestra */
+  .mobile-menu.open .mobile-menu-panel,
+  .mobile-menu.open .mobile-backdrop{
+    display: block !important;
+  }
+}
 
 
 
@@ -1156,4 +1168,3 @@ body.light .contribution activity-graph {
         background: rgba(79, 198, 206, 0.12) !important;
         color: rgba(0, 0, 0, 0.85) !important;
     }
-}
