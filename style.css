@@ -1083,6 +1083,7 @@ body.light .contribution activity-graph {
     }
 
 
+<<<<<<< HEAD
 
 /* separaciones */
 
@@ -1091,6 +1092,8 @@ body.light .contribution activity-graph {
     width: 100%;
     margin: 10px 0;
 }
+=======
+>>>>>>> parent of fd133 (23 commit)
 
 .ltr {
     background: radial-gradient(ellipse at left, var(--accent-02) -70%, transparent 80%);
