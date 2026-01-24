@@ -899,10 +899,8 @@ body.light .contribution activity-graph {
         display: grid;
         gap: 10px;
         position: fixed;
-        bottom: 14px;
-        right: 14px;
-        left: auto;
-        top: auto;
+        top: 14px;
+        left: 14px;
         z-index: 2200;
     }
 
@@ -939,6 +937,8 @@ body.light .contribution activity-graph {
 .mobile-menu {
     display: none;
 }
+
+@media screen and (width <=769px) {
     html {
         scroll-padding-top: 20px;}
 
@@ -968,20 +968,18 @@ body.light .contribution activity-graph {
 
         /* El panel SIEMPRE arriba y clickeable */
         .mobile-menu-panel {
-            position: fixed;
-            top: auto;
-            left: auto;
+            position: absolute;
+            top: 14px;
+            left: 80px;
             width: min(78vw, 320px);
             padding: 14px;
             border-radius: 22px;
-            transform: translateY(10px);
+            transform: translateY(-6px);
             transition: transform .18s;
             z-index: 1;
             /* 👈 arriba del backdrop */
             pointer-events: auto;
             /* 👈 permite clicks */
-            right: 14px;
-    bottom: 78px;  /* ✅ se abre arriba de los botones */
         }
 
         .mobile-menu.open .mobile-menu-panel {
@@ -1152,4 +1150,5 @@ body.light .mobile-link:hover {
     border-color: rgba(79, 198, 206, 0.55) !important;
     background: rgba(79, 198, 206, 0.12) !important;
     color: rgba(0, 0, 0, 0.85) !important;
+}
 }
