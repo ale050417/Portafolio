@@ -175,3 +175,30 @@ async function loadContributions() {
 
 
 document.addEventListener("DOMContentLoaded", loadContributions);
+
+// ===== Mobile menu (FAB) =====
+document.addEventListener("DOMContentLoaded", () => {
+  const mobileMenu = document.getElementById("mobileMenu");
+  const openMobileMenu = document.getElementById("openMobileMenu");
+  const closeMobileMenu = document.getElementById("closeMobileMenu");
+  const mobileBackdrop = document.getElementById("mobileBackdrop");
+
+  function setMobileMenu(open) {
+    if (!mobileMenu) return;
+    mobileMenu.classList.toggle("open", open);
+    mobileMenu.setAttribute("aria-hidden", String(!open));
+  }
+
+  openMobileMenu?.addEventListener("click", () => setMobileMenu(true));
+  closeMobileMenu?.addEventListener("click", () => setMobileMenu(false));
+  mobileBackdrop?.addEventListener("click", () => setMobileMenu(false));
+
+  // cerrar al tocar una sección
+  mobileMenu?.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
+    if (link) setMobileMenu(false);
+  });
+
+  // scroll suave para anchors
+  document.documentElement.style.scrollBehavior = "smooth";
+});

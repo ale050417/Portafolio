@@ -933,14 +933,15 @@ body.light .contribution activity-graph {
         border-color: rgba(79, 198, 206, 0.25);
     }
 
-/* ========================Panel  ========================= */
-.mobile-menu {
-    display: none;
-}
+    /* ========================Panel  ========================= */
+    .mobile-menu {
+        display: none;
+    }
 
-@media screen and (width <=769px) {
-    html {
-        scroll-padding-top: 20px;}
+    @media screen and (width <=769px) {
+        html {
+            scroll-padding-top: 20px;
+        }
 
         .mobile-menu {
             display: block;
@@ -969,17 +970,17 @@ body.light .contribution activity-graph {
         /* El panel SIEMPRE arriba y clickeable */
         .mobile-menu-panel {
             position: absolute;
-            top: 14px;
-            left: 80px;
+            top:140px;
+            left: 14px;
             width: min(78vw, 320px);
             padding: 14px;
             border-radius: 22px;
+
             transform: translateY(-6px);
             transition: transform .18s;
+
             z-index: 1;
-            /* 👈 arriba del backdrop */
             pointer-events: auto;
-            /* 👈 permite clicks */
         }
 
         .mobile-menu.open .mobile-menu-panel {
@@ -1081,12 +1082,13 @@ body.light .contribution activity-graph {
 
 
 
-.ltr {
-    background: radial-gradient(ellipse at left, var(--accent-02) -70%, transparent 80%);
-}
-.rtl {
-    background: radial-gradient(ellipse at right, var(--accent-02) -70%, transparent 80%);
-}
+    .ltr {
+        background: radial-gradient(ellipse at left, var(--accent-02) -70%, transparent 80%);
+    }
+
+    .rtl {
+        background: radial-gradient(ellipse at right, var(--accent-02) -70%, transparent 80%);
+    }
 
     /* separaciones */
 
@@ -1107,48 +1109,48 @@ body.light .contribution activity-graph {
 
 
 
-/* sin celeste) */
-body.light .fab,
-body.light .fab-primary {
-    background: rgba(255, 255, 255, 0.85) !important;
-    border: 1px solid rgba(0, 0, 0, 0.08) !important;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, .12) !important;
-}
+    /* sin celeste) */
+    body.light .fab,
+    body.light .fab-primary {
+        background: rgba(255, 255, 255, 0.85) !important;
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .12) !important;
+    }
 
-/* iconos en celestee */
-body.light .fab ion-icon {
-    color: var(--primary-color) !important;
-}
+    /* iconos en celestee */
+    body.light .fab ion-icon {
+        color: var(--primary-color) !important;
+    }
 
-body.light .mobile-menu-panel {
-    background: rgba(255, 255, 255, 0.92) !important;
-    border: 1px solid rgba(0, 0, 0, 0.10) !important;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, .18) !important;
-}
+    body.light .mobile-menu-panel {
+        background: rgba(255, 255, 255, 0.92) !important;
+        border: 1px solid rgba(0, 0, 0, 0.10) !important;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, .18) !important;
+    }
 
-/* título "SECCIONES" */
-body.light .mobile-menu-head {
-    color: rgba(0, 0, 0, 0.60) !important;
-}
+    /* título "SECCIONES" */
+    body.light .mobile-menu-head {
+        color: rgba(0, 0, 0, 0.60) !important;
+    }
 
-/* botón X */
-body.light .mobile-close {
-    color: rgba(0, 0, 0, 0.70) !important;
-}
+    /* botón X */
+    body.light .mobile-close {
+        color: rgba(0, 0, 0, 0.70) !important;
+    }
 
-/* links con contraste real */
-body.light .mobile-link {
-    background: rgba(0, 0, 0, 0.06) !important;
-    /* ✅ más visible */
-    border: 1px solid rgba(0, 0, 0, 0.10) !important;
-    color: rgba(0, 0, 0, 0.82) !important;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, .06);
-}
+    /* links con contraste real */
+    body.light .mobile-link {
+        background: rgba(0, 0, 0, 0.06) !important;
+        /* ✅ más visible */
+        border: 1px solid rgba(0, 0, 0, 0.10) !important;
+        color: rgba(0, 0, 0, 0.82) !important;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, .06);
+    }
 
-/* efecto al tocar/pasar */
-body.light .mobile-link:hover {
-    border-color: rgba(79, 198, 206, 0.55) !important;
-    background: rgba(79, 198, 206, 0.12) !important;
-    color: rgba(0, 0, 0, 0.85) !important;
-}
+    /* efecto al tocar/pasar */
+    body.light .mobile-link:hover {
+        border-color: rgba(79, 198, 206, 0.55) !important;
+        background: rgba(79, 198, 206, 0.12) !important;
+        color: rgba(0, 0, 0, 0.85) !important;
+    }
 }
