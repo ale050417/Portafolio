@@ -491,7 +491,7 @@ body.light .contribution activity-graph {
     border: 3px solid var(--accent-04);
     border-radius: 14px;
     padding: 14px;
-    display: flex;
+    display: grid;
     gap: 10px;
     align-items: flex-start;
     transition: border-color .4s, transform .2s;
@@ -545,8 +545,6 @@ body.light .contribution activity-graph {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    width: 100%;
-  max-width: 420px;
 }
 
 .contact-form input,
