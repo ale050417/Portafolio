@@ -934,14 +934,13 @@ body.light .contribution activity-graph {
         background: rgba(79, 198, 206, 0.14);
         border-color: rgba(79, 198, 206, 0.25);
     }
-}
 
 /* ========================Panel  ========================= */
 .mobile-menu {
     display: none;
 }
     html {
-        scroll-padding-top: 20px;
+        scroll-padding-top: 20px;}
 
         .mobile-menu {
             display: block;
@@ -1081,31 +1080,12 @@ body.light .contribution activity-graph {
             top: auto;
         }
     }
-
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-/* separaciones */
-
-.divider {
-    height: 2px;
-    width: 100%;
-    margin: 10px 0;
-}
-=======
->>>>>>> parent of fd133 (23 commit)
-
 .ltr {
     background: radial-gradient(ellipse at left, var(--accent-02) -70%, transparent 80%);
 }
-
-
 .rtl {
     background: radial-gradient(ellipse at right, var(--accent-02) -70%, transparent 80%);
-=======
->>>>>>> parent of fd133 (23 commit)
-
+}
 
     /* separaciones */
 
@@ -1123,7 +1103,7 @@ body.light .contribution activity-graph {
     .rtl {
         background: radial-gradient(ellipse at right, var(--accent-02) -70%, transparent 80%);
     }
-}
+
 
 /* sin celeste) */
 body.light .fab,

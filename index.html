@@ -10,9 +10,8 @@
         src="https://cdn.jsdelivr.net/npm/@mariohamann/activity-graph/dist/activity-graph.min.js"></script>
     <title>Mi Portafolio</title>
     <link rel="stylesheet" href="style.css">
-    <script src="api/contact.js" defer></script>
-    <script src="api/github.js" defer></script>
-
+    <link rel="stylesheet" href="api/contact.js">
+    <link rel="stylesheet" href="api/github.js">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
@@ -379,40 +378,6 @@
     </div>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="script.js"></script>
-    <!--   botones flotantes  -->
-    <div class="fab-stack" aria-label="Acciones rápidas">
-        <button class="fab" onclick="theme()" aria-label="Cambiar tema">
-            <ion-icon id="lightBtnFab" name="sunny-outline"></ion-icon>
-            <ion-icon id="darkBtnFab" name="moon-outline" style="display:none;"></ion-icon>
-        </button>
-
-        <button class="fab fab-primary" id="openMobileMenu" aria-label="Abrir menú">
-            <ion-icon name="apps-outline"></ion-icon>
-        </button>
-    </div>
-
-    <!-- Panel de menu solo movil -->
-    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-        <div class="mobile-menu-panel box">
-            <div class="mobile-menu-head">
-                <span>Secciones</span>
-                <button class="mobile-close" id="closeMobileMenu" aria-label="Cerrar">✕</button>
-            </div>
-
-            <a href="#about" class="mobile-link">Sobre mí</a>
-            <a href="#resume" class="mobile-link">Experiencia</a>
-            <a href="#projects" class="mobile-link">Proyectos</a>
-            <a href="#contact" class="mobile-link">Contacto</a>
-        </div>
-
-        <button class="mobile-backdrop" id="mobileBackdrop" aria-label="Cerrar"></button>
-    </div>
-
-    <!-- pongo al final asi los llamo por ultimo -->
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <script src="script.js"></script>
-</body>
-
 </body>
 
 </html>

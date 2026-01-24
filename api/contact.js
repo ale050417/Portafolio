@@ -44,7 +44,7 @@ export default async function handler(req, res) {
 
     const raw = await ghRes.text();
     let data = {};
-    try { data = raw ? JSON.parse(raw) : {}; } catch { }
+    try { data = raw ? JSON.parse(raw) : {}; } catch {}
 
     if (!ghRes.ok || data.errors) {
       return res.status(500).json({
