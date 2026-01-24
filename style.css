@@ -833,14 +833,18 @@ body.light .contribution activity-graph {
         grid-template-columns: 1fr;
         max-width: 500px;
         padding: 20px;
-        padding-top: 50px;
+        padding-top: 10px;
     }
 
     .navbar {
+        padding-bottom: 30px;
         display: -ms-inline-grid;
         grid-template-columns: 85px 1fr;
     }
 
+      .navbar ion-icon {
+        font-size: 22px;
+    }
     .nav {
         display: inline-grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
