@@ -6,22 +6,13 @@
     text-decoration: inherit;
     box-sizing: border-box;
 }
-
-img,
-video,
-iframe,
-svg,
-canvas {
-    max-width: 100%;
-    height: auto;
+img, video, iframe, svg, canvas {
+  max-width: 100%;
+  height: auto;
 }
 
-.box,
-.content,
-.profile,
-.navbar {
-    min-width: 0;
-    /* evita overflow en grid */
+.box, .content, .profile, .navbar {
+  min-width: 0; /* evita overflow en grid */
 }
 
 
@@ -169,6 +160,10 @@ body.light .box {
     display: inline;
 }
 
+.profile .footer {
+    position: sticky;
+    top: calc(100vh - 100px);
+}
 
 .profile table {
     width: 100%;
@@ -650,188 +645,185 @@ body.light .contribution activity-graph {
 
 
 }
-
 /* =======================
    TABLET (768px - 1023px)
    ======================= */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
 
-    /* Contenedor general: 2 columnas (navbar + resto) */
-    .container {
-        grid-template-columns: 95px 1fr;
-        gap: 14px;
-        max-width: 900px;
-        padding: 30px;
-        padding-top: 60px;
-    }
+  /* Contenedor general: 2 columnas (navbar + resto) */
+  .container {
+    grid-template-columns: 95px 1fr;
+    gap: 14px;
+    max-width: 900px;
+    padding: 30px;
+    padding-top: 60px;
+  }
 
-    /* Navbar: fija, prolija y con ancho consistente */
-    .navbar {
-        top: 20px;
-    }
+  /* Navbar: fija, prolija y con ancho consistente */
+  .navbar {
+    top: 20px;
+  }
 
-    .navbar>.box {
-        border-radius: 18px;
-    }
+  .navbar > .box {
+    border-radius: 18px;
+  }
 
-    .navbar>div {
-        padding: 18px 8px;
-    }
+  .navbar > div {
+    padding: 18px 8px;
+  }
 
-    .navbar ion-icon {
-        font-size: 28px;
-    }
+  .navbar ion-icon {
+    font-size: 28px;
+  }
 
-    .navbar .item p {
-        font-size: 11px;
-        letter-spacing: .8px;
-    }
+  .navbar .item p {
+    font-size: 11px;
+    letter-spacing: .8px;
+  }
 
-    /* Profile: ocupa toda la segunda columna (arriba) */
-    .profile {
-        grid-column: 2 / -1;
-        grid-row: auto;
-        border-radius: 18px;
-        font-size: 18px;
-    }
+  /* Profile: ocupa toda la segunda columna (arriba) */
+  .profile {
+    grid-column: 2 / -1;
+    grid-row: auto;
+    border-radius: 18px;
+    font-size: 18px;
+  }
 
-    .profile .header {
-        border-radius: 18px 18px 0 0;
-        max-height: 320px;
-        object-fit: cover;
-    }
+  .profile .header {
+    border-radius: 18px 18px 0 0;
+    max-height: 320px;
+    object-fit: cover;
+  }
 
-    .profile .img {
-        width: 120px;
-        margin: -55px auto 0;
-        border-width: 7px;
-        border-radius: 28px;
-    }
+  .profile .img {
+    width: 120px;
+    margin: -55px auto 0;
+    border-width: 7px;
+    border-radius: 28px;
+  }
 
-    .profile ul {
-        margin: 20px 0 50px 0;
-    }
+  .profile ul {
+    margin: 20px 0 50px 0;
+  }
 
-    /* Footer del profile: no sticky en tablet (evita superposición rara) */
-    .profile .footer {
-        position: static;
-        top: auto;
-    }
+  /* Footer del profile: no sticky en tablet (evita superposición rara) */
+  .profile .footer {
+    position: static;
+    top: auto;
+  }
 
-    .profile table td a {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        width: 100%;
-    }
+  .profile table td a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+  }
 
-    /* Content: debajo del profile, misma columna */
-    .content {
-        grid-column: 2 / -1;
-        /* ✅ importante (en tablet no existe col 4) */
-        border-radius: 18px;
-        padding: 18px 14px 18px 18px;
-    }
+  /* Content: debajo del profile, misma columna */
+  .content {
+    grid-column: 2 / -1; /* ✅ importante (en tablet no existe col 4) */
+    border-radius: 18px;
+    padding: 18px 14px 18px 18px;
+  }
 
-    .content .wrapper {
-        max-height: calc(100vh - 170px);
-        /* mantiene scroll usable */
-        padding-right: 10px;
-    }
+  .content .wrapper {
+    max-height: calc(100vh - 170px); /* mantiene scroll usable */
+    padding-right: 10px;
+  }
 
-    .content h1,
-    .content h2 {
-        font-size: 1.7em;
-    }
+  .content h1,
+  .content h2 {
+    font-size: 1.7em;
+  }
 
-    .content p {
-        font-size: 17px;
-    }
+  .content p {
+    font-size: 17px;
+  }
 
-    /* Achivaments list */
-    .progress-list li {
-        padding: 10px 12px;
-        border-radius: 12px;
-    }
+  /* Achivaments list */
+  .progress-list li {
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
 
-    /* Skills */
-    .skills-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
+  /* Skills */
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
 
-    .skill {
-        padding: 18px 14px;
-        border-radius: 12px;
-    }
+  .skill {
+    padding: 18px 14px;
+    border-radius: 12px;
+  }
 
-    .tech-icon {
-        font-size: 30px;
-    }
+  .tech-icon {
+    font-size: 30px;
+  }
 
-    /* Experience */
-    .experience p {
-        font-size: 16px;
-    }
+  /* Experience */
+  .experience p {
+    font-size: 16px;
+  }
 
-    /* Contributions (activity-graph) */
-    .contribution {
-        border-radius: 12px;
-        overflow: hidden;
-    }
+  /* Contributions (activity-graph) */
+  .contribution {
+    border-radius: 12px;
+    overflow: hidden;
+  }
 
-    /* Esto es CLAVE: que el gráfico no rompa y permita scroll horizontal */
-    .contribution activity-graph {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        padding: 12px 14px;
-    }
+  /* Esto es CLAVE: que el gráfico no rompa y permita scroll horizontal */
+  .contribution activity-graph {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    padding: 12px 14px;
+  }
 
-    /* Asegura scroll si el componente es más ancho */
-    .contribution>div,
-    .contribution figure {
-        overflow-x: auto;
-        overflow-y: hidden;
-    }
+  /* Asegura scroll si el componente es más ancho */
+  .contribution > div,
+  .contribution figure {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
 
-    /* Proyectos: card vacío */
-    .projects-empty {
-        gap: 12px;
-        border-radius: 14px;
-    }
+  /* Proyectos: card vacío */
+  .projects-empty {
+    gap: 12px;
+    border-radius: 14px;
+  }
 
-    /* Contact: 1 columna para que no se aplaste */
-    .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
-    }
+  /* Contact: 1 columna para que no se aplaste */
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
 
-    .contact-card {
-        border-radius: 14px;
-        padding: 14px;
-    }
+  .contact-card {
+    border-radius: 14px;
+    padding: 14px;
+  }
 
-    /* Form */
-    .contact-form .row {
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 10px;
-    }
+  /* Form */
+  .contact-form .row {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
 
-    .contact-form input,
-    .contact-form textarea {
-        border-radius: 12px;
-    }
+  .contact-form input,
+  .contact-form textarea {
+    border-radius: 12px;
+  }
 
-    .btn-primary {
-        border-radius: 12px;
-    }
+  .btn-primary {
+    border-radius: 12px;
+  }
 
-    /* Dividers un poco más suaves */
-    .divider {
-        margin: 12px 0;
-    }
+  /* Dividers un poco más suaves */
+  .divider {
+    margin: 12px 0;
+  }
 }
 
 
@@ -843,44 +835,43 @@ body.light .contribution activity-graph {
         padding: 20px;
         padding-top: 100px;
     }
+/* navbar flotante arriba */
+  .navbar{
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
 
-    /* navbar flotante arriba */
-    .navbar {
-        position: fixed;
-        top: 12px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 999;
+    width: min(92vw, 520px);
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 10px;
+  }
 
-        width: min(92vw, 520px);
-        display: grid;
-        grid-template-columns: 64px 1fr;
-        gap: 10px;
-    }
+  /* el bloque de iconos */
+  .navbar .nav{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    padding: 10px 12px;
+    border-radius: 18px;
+  }
 
-    /* el bloque de iconos */
-    .navbar .nav {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        align-items: center;
-        padding: 10px 12px;
-        border-radius: 18px;
-    }
+  /* botón tema (sol/luna) */
+  .navbar .theme{
+    border-radius: 18px;
+  }
 
-    /* botón tema (sol/luna) */
-    .navbar .theme {
-        border-radius: 18px;
-    }
+  /* ocultar textos y divisores */
+  .navbar .nav p,
+  .navbar .divider{
+    display: none;
+  }
 
-    /* ocultar textos y divisores */
-    .navbar .nav p,
-    .navbar .divider {
-        display: none;
-    }
-
-    .navbar ion-icon {
-        font-size: 22px;
-    }
+  .navbar ion-icon{
+    font-size: 22px;
+  }
 
     .achivaments {
         grid-template-columns: 1fr;
@@ -930,12 +921,9 @@ body.light .contribution activity-graph {
         min-width: 720px;
         /* probá 650 / 720 / 800 según gusto */
     }
-
-    .profile .footer {
-        position: none;
-    }
-    .profile{
-        padding-bottom: 16px;
+    .profile .footer{
+        position: static;
+        top: auto;
     }
 }
 
