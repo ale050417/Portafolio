@@ -38,7 +38,9 @@ function theme() {
         darkBtn.style.display = 'none';
         lightBtn.style.display = 'block';
     }
+
 }
+
 
 //menu
 const menuItems = document.querySelectorAll('.nav .item');
@@ -51,26 +53,26 @@ menuItems.forEach(item => {
 })
 // Smooth scroll dentro del contenedor .content .wrapper (funciona bien en mobile/tablet)
 document.querySelectorAll('.nav a[href^="#"]').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
 
-    const targetId = link.getAttribute('href');
-    const targetEl = document.querySelector(targetId);
-    const wrapper = document.querySelector('.content .wrapper');
+        const targetId = link.getAttribute('href');
+        const targetEl = document.querySelector(targetId);
+        const wrapper = document.querySelector('.content .wrapper');
 
-    if (!targetEl || !wrapper) return;
+        if (!targetEl || !wrapper) return;
 
-    // Posición del target relativa al wrapper (robusta para responsive)
-    const wrapperRect = wrapper.getBoundingClientRect();
-    const targetRect = targetEl.getBoundingClientRect();
+        // Posición del target relativa al wrapper (robusta para responsive)
+        const wrapperRect = wrapper.getBoundingClientRect();
+        const targetRect = targetEl.getBoundingClientRect();
 
-    const top = (targetRect.top - wrapperRect.top) + wrapper.scrollTop;
+        const top = (targetRect.top - wrapperRect.top) + wrapper.scrollTop;
 
-    wrapper.scrollTo({
-      top: Math.max(top - 15, 0), // margen superior
-      behavior: 'smooth'
+        wrapper.scrollTo({
+            top: Math.max(top - 15, 0), // margen superior
+            behavior: 'smooth'
+        });
     });
-  });
 });
 
 
@@ -175,3 +177,30 @@ async function loadContributions() {
 
 
 document.addEventListener("DOMContentLoaded", loadContributions);
+
+// ===== Mobile menu (FAB) =====
+document.addEventListener("DOMContentLoaded", () => {
+    const mobileMenu = document.getElementById("mobileMenu");
+    const openMobileMenu = document.getElementById("openMobileMenu");
+    const closeMobileMenu = document.getElementById("closeMobileMenu");
+    const mobileBackdrop = document.getElementById("mobileBackdrop");
+
+    function setMobileMenu(open) {
+        if (!mobileMenu) return;
+        mobileMenu.classList.toggle("open", open);
+        mobileMenu.setAttribute("aria-hidden", String(!open));
+    }
+
+    openMobileMenu?.addEventListener("click", () => setMobileMenu(true));
+    closeMobileMenu?.addEventListener("click", () => setMobileMenu(false));
+    mobileBackdrop?.addEventListener("click", () => setMobileMenu(false));
+
+    // cerrar al tocar una sección
+    mobileMenu?.addEventListener("click", (e) => {
+        const link = e.target.closest("a");
+        if (link) setMobileMenu(false);
+    });
+
+    // scroll suave para anchors
+    document.documentElement.style.scrollBehavior = "smooth";
+});
