@@ -1080,7 +1080,7 @@ body.light .contribution activity-graph {
         }
     }
 
-
+}
 
 
     /* separaciones */
@@ -1099,7 +1099,6 @@ body.light .contribution activity-graph {
     .rtl {
         background: radial-gradient(ellipse at right, var(--accent-02) -70%, transparent 80%);
     }
-}
 
 /* sin celeste) */
 body.light .fab,
@@ -1144,4 +1143,5 @@ body.light .mobile-link:hover {
     border-color: rgba(79, 198, 206, 0.55) !important;
     background: rgba(79, 198, 206, 0.12) !important;
     color: rgba(0, 0, 0, 0.85) !important;
+}
 }
