@@ -696,6 +696,10 @@ body.light .contribution activity-graph {
     .skills-grid {
         grid-template-columns: repeat(4, 1fr);
     }
+    .contact-card{
+        display: flex;
+    }
+   
 
 
 }
