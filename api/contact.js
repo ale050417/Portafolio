@@ -1,80 +1,63 @@
-// api/github.js
+// api/contact.js
 export default async function handler(req, res) {
   try {
-    const username = process.env.GITHUB_USERNAME;
-    const token = process.env.GITHUB_TOKEN;
-
-    if (!username) {
-      return res.status(500).json({ error: "Falta GITHUB_USERNAME en Vercel." });
+    if (req.method !== "POST") {
+      return res.status(405).json({ error: "Método no permitido" });
     }
 
-    // SOLO 2026
-    const from = "2026-01-01T00:00:00Z";
-    const to = "2026-12-31T23:59:59Z";
+    const { name, email, subject, message, website } = req.body || {};
 
-    const query = `
-      query ($login: String!, $from: DateTime!, $to: DateTime!) {
-        user(login: $login) {
-          contributionsCollection(from: $from, to: $to) {
-            contributionCalendar {
-              totalContributions
-              weeks {
-                contributionDays {
-                  date
-                  contributionCount
-                }
-              }
-            }
-          }
-        }
-      }
-    `;
+    // honeypot anti-spam
+    if (website) {
+      return res.status(200).json({ ok: true });
+    }
 
-    const ghRes = await fetch("https://api.github.com/graphql", {
+    if (!name || !email || !message) {
+      return res.status(400).json({ error: "Faltan campos requeridos." });
+    }
+
+    // ✅ ACÁ elegís cómo enviar:
+    // Opción A: Resend (recomendado)
+    const RESEND_API_KEY = process.env.RESEND_API_KEY;
+    const TO_EMAIL = process.env.CONTACT_TO_EMAIL; // tu email destino
+    const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL; // dominio verificado en Resend
+
+    if (!RESEND_API_KEY || !TO_EMAIL || !FROM_EMAIL) {
+      return res.status(500).json({ error: "Faltan variables de entorno para email." });
+    }
+
+    const payload = {
+      from: FROM_EMAIL,
+      to: [TO_EMAIL],
+      subject: subject ? `Portafolio: ${subject}` : "Nuevo mensaje desde tu portafolio",
+      reply_to: email,
+      text:
+        `Nuevo mensaje desde el portafolio\n\n` +
+        `Nombre: ${name}\n` +
+        `Email: ${email}\n` +
+        `Asunto: ${subject || "(sin asunto)"}\n\n` +
+        `Mensaje:\n${message}\n`,
+    };
+
+    const sendRes = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${RESEND_API_KEY}`,
         "Content-Type": "application/json",
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
-      body: JSON.stringify({
-        query,
-        variables: { login: username, from, to },
-      }),
+      body: JSON.stringify(payload),
     });
 
-    const raw = await ghRes.text();
+    const raw = await sendRes.text();
     let data = {};
     try { data = raw ? JSON.parse(raw) : {}; } catch {}
 
-    if (!ghRes.ok || data.errors) {
-      return res.status(500).json({
-        error: data?.errors?.[0]?.message || "Error consultando GitHub GraphQL",
-        details: data,
-      });
+    if (!sendRes.ok) {
+      return res.status(500).json({ error: "Error enviando email", details: data });
     }
 
-    const weeks =
-      data?.data?.user?.contributionsCollection?.contributionCalendar?.weeks || [];
-
-    const CAP = 10;
-    const dates = [];
-
-    for (const w of weeks) {
-      for (const d of w.contributionDays) {
-        const repeat = Math.min(d.contributionCount || 0, CAP);
-        for (let i = 0; i < repeat; i++) dates.push(d.date);
-      }
-    }
-
-    return res.status(200).json({
-      activityData: dates.join(","),
-      rangeStart: "2026-01-01",
-      rangeEnd: "2026-12-31",
-      cap: CAP,
-      total:
-        data.data.user.contributionsCollection.contributionCalendar.totalContributions,
-    });
+    return res.status(200).json({ ok: true, id: data?.id });
   } catch (err) {
-    return res.status(500).json({ error: "Error inesperado.", detail: String(err) });
+    return res.status(500).json({ error: "Error inesperado", detail: String(err) });
   }
 }
