@@ -1,416 +1,586 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
-    <script type="module"
-        src="https://cdn.jsdelivr.net/npm/@mariohamann/activity-graph/dist/activity-graph.min.js"></script>
-    <title>Mi Portafolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alexander Ibarra — Robótica, apps y plataformas web</title>
+    <meta name="description"
+        content="El taller de Alexander Ibarra: robótica, apps móviles y plataformas web. Cofundador de Órbita y creador de Fadely, Hefesto 3D y Arduino IOT. Puerto Iguazú, Misiones.">
+    <meta name="author" content="Alexander Ibarra">
+    <meta name="theme-color" content="#04060A">
+    <meta name="color-scheme" content="dark">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:site_name" content="Alexander Ibarra">
+    <meta property="og:title" content="Alexander Ibarra — Robótica, apps y plataformas web">
+    <meta property="og:description"
+        content="Un taller en 3D para recorrer: Órbita, Fadely, Hefesto 3D y Arduino IOT.">
+    <meta property="og:image" content="assets/og.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+    <!-- three.js para la escena 3D -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.min.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/",
+            "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.core.js": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.core.min.js"
+        }
+    }
+    </script>
+    <script>
+        (function () {
+            var root = document.documentElement;
+            root.classList.add('js', 'is-loading');
+
+            // si script.js no llega a arrancar (navegador muy viejo, corte de red), el sitio queda
+            // como sin JavaScript: todo a la vista, con la foto fija de fondo
+            document.addEventListener('DOMContentLoaded', function () {
+                if (!window.portfolioStarted) root.classList.remove('js', 'is-loading');
+            });
+
+            // Con el ahorro de datos activado, o una conexión muy lenta, la escena 3D no se descarga:
+            // queda la foto fija del taller (ver script.js). Con ?calidad= en la dirección se fuerza igual.
+            var net = navigator.connection;
+            if (net && (net.saveData || /2g/.test(net.effectiveType || '')) && !/[?&]calidad=/.test(location.search)) {
+                root.classList.add('save-data');
+                return;
+            }
+
+            // la escena se empieza a bajar ya mismo, sin esperar a los estilos
+            [
+                'https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.min.js',
+                'https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.core.min.js',
+                'https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/geometries/RoundedBoxGeometry.js',
+                'taller.js'
+            ].forEach(function (href) {
+                var link = document.createElement('link');
+                link.rel = 'modulepreload';
+                link.href = href;
+                document.head.appendChild(link);
+            });
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400..600&family=Sora:ital,wght@0,300..700;1,600&display=swap">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="api/contact.js">
-<link rel="stylesheet" href="api/github.js">
 
-    <script src="api/contact.js" defer></script>
-    <script src="api/github.js" defer></script>
+    <!-- script.js arranca taller.js (la escena) solo si el equipo puede con ella; si no, queda la foto fija -->
+    <script src="script.js" defer></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Alexander Ibarra",
+        "jobTitle": "Facilitador de robótica, desarrollador y cofundador de Órbita",
+        "email": "mailto:alexanderibarra.dev@gmail.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Puerto Iguazú",
+            "addressRegion": "Misiones",
+            "addressCountry": "AR"
+        },
+        "worksFor": { "@type": "Organization", "name": "Órbita", "url": "https://www.orbita.site/" },
+        "sameAs": [
+            "https://github.com/ale050417",
+            "https://www.linkedin.com/in/alexander-ibarra-179238170/"
+        ]
+    }
+    </script>
 </head>
 
 <body>
-    <div class="container">
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
+    <!-- Íconos: Lucide (interfaz) y Simple Icons (marcas) -->
+    <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></symbol>
+        <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+        <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+        <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+        <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+        <symbol id="i-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol>
+        <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+        <symbol id="b-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+        <symbol id="b-googleplay" viewBox="0 0 24 24"><path d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"/></symbol>
+        <symbol id="b-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
+    </svg>
 
-        <!-------------navbar------------->
-        <nav class="navbar">
-            <div class="box theme">
-                <div class="item" onclick="theme()">
-                    <ion-icon id="lightBtn" name="sunny-outline"></ion-icon>
-                    <ion-icon id="darkBtn" name="moon-outline" style="display: none;"></ion-icon>
-                </div>
-            </div>
-            <div class="box nav">
-                <div class="item">
-                    <a href="#about">
-                        <ion-icon name="person-circle-outline"></ion-icon>
-                        <p>Sobre mí</p>
-                    </a>
-                    <div class="divider rtl"></div>
-                </div>
-                <div class="item">
-                    <a href="#resume">
-                        <ion-icon name="file-tray-full-outline"></ion-icon>
-                        <p>Experiencia</p>
-                    </a>
-                    <div class="divider rtl"></div>
-                </div>
-                <div class="item">
-                    <a href="#projects">
-                        <ion-icon name="layers-outline"></ion-icon>
-                        <p>Proyectos</p>
-                    </a>
-                    <div class="divider rtl"></div>
-                </div>
-                <!--
-                <div class="item">
-                    <a href="#blogs">
-                        <ion-icon name="reader-outline"></ion-icon>
-                        <p>blogs</p>
-                    </a>
-                    <div class="divider rtl"></div>
-                </div>
-                -->
+    <!-- la escena 3D va fija detrás de todo -->
+    <!-- foto fija del taller: queda de fondo cuando el equipo no puede con la escena 3D -->
+    <div class="scene-still" aria-hidden="true"></div>
+    <canvas class="scene" id="scene" aria-hidden="true"></canvas>
+    <div class="scene-shade" aria-hidden="true"></div>
 
-                <div class="item">
-                    <a href="#contact">
-                        <ion-icon name="call-outline"></ion-icon>
-                        <p>Contacto</p>
-                    </a>
-                </div>
-            </div>
+    <!------------- pantalla de carga ------------->
+    <div class="loader" id="loader" role="status" aria-live="polite">
+        <div class="loader__box">
+            <svg class="loader__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+                <circle class="loader__ring" cx="32" cy="32" r="27"/>
+                <path class="loader__arm" d="M22 46v-9l9-11 10 5"/>
+                <circle cx="22" cy="37" r="3.2"/><circle cx="31" cy="26" r="3.2"/><circle cx="41" cy="31" r="3.2"/>
+                <path class="loader__base" d="M15 48h14"/>
+            </svg>
+            <p class="loader__name">Alexander Ibarra</p>
+            <p class="loader__text"><span id="loaderText">Encendiendo el taller</span> <span id="loaderPct">0%</span></p>
+            <div class="loader__bar"><span id="loaderBar"></span></div>
+        </div>
+    </div>
+
+    <!------------- encabezado ------------->
+    <header class="site-header" id="siteHeader">
+        <a class="brand" href="#inicio" aria-label="Alexander Ibarra, ir al inicio">
+            <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+                <rect class="brand__mark-bg" x="1" y="1" width="30" height="30" rx="9"/>
+                <path class="brand__mark-a" d="M9.5 23 16 9l6.5 14M12 18h8"/>
+                <circle class="brand__mark-dot" cx="24.5" cy="7.5" r="2.6"/>
+            </svg>
+            <span class="brand__name">Alexander Ibarra</span>
+        </a>
+
+        <nav class="nav" aria-label="Secciones">
+            <a class="nav__link" href="#orbita" data-group="proyectos">Proyectos</a>
+            <a class="nav__link" href="#sobre-mi" data-group="sobre-mi">Sobre mí</a>
+            <a class="nav__link" href="#contacto" data-group="contacto">Contacto</a>
         </nav>
 
-        <!-------------perfil------------->
-        <div class="box profile">
-            <img class="header" src="assets/Foto grande.webp" alt="">
-            <img class="img" src="assets/Foto de perfil.webp" alt="">
-            <h2>Alexander Ibarra</h2>
-            <p id="typed" class="colored"></p>
+        <a class="btn btn--glow btn--sm site-header__cta" href="#contacto">Hablemos</a>
+        <button class="icon-btn nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileNav"
+            aria-label="Abrir menú">
+            <svg class="icon icon--menu" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg>
+            <svg class="icon icon--close" aria-hidden="true" focusable="false"><use href="#i-x"/></svg>
+        </button>
+    </header>
 
-            <ul>
-                <li><a href="https://github.com/ale050417"><ion-icon name="logo-github"></ion-icon></a></li>
-                <!--<li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>-->
-                <li><a href="https://www.linkedin.com/in/alexander-ibarra-179238170/"><ion-icon
-                            name="logo-linkedin"></ion-icon></a></li>
-            </ul>
+    <!-- Menú en pantallas chicas -->
+    <div class="mobile-nav" id="mobileNav" hidden>
+        <nav class="mobile-nav__inner" aria-label="Secciones">
+            <a class="mobile-nav__link" href="#orbita"><span>01</span>Órbita</a>
+            <a class="mobile-nav__link" href="#fadely"><span>02</span>Fadely</a>
+            <a class="mobile-nav__link" href="#hefesto"><span>03</span>Hefesto 3D</a>
+            <a class="mobile-nav__link" href="#arduino"><span>04</span>Arduino IOT</a>
+            <a class="mobile-nav__link" href="#sobre-mi"><span>05</span>Sobre mí</a>
+            <a class="mobile-nav__link" href="#contacto"><span>06</span>Contacto</a>
+        </nav>
+    </div>
 
-            <div class="footer">
-                <div class="divider rtl"></div>
-                <table>
-                    <tr>
-                        <td><a href="assets/Alexander_Ibarra_CV.pdf" download class="cv-btn">Descargar CV<ion-icon
-                                    name="download-outline"></ion-icon></a></td>
-                        <td><a href="#contact">Contáctame <ion-icon name="call-outline"></ion-icon></a></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+    <!-- las paradas del recorrido -->
+    <nav class="rail" aria-label="Recorrido del taller">
+        <a class="rail__dot" href="#inicio"><span>Inicio</span></a>
+        <a class="rail__dot" href="#orbita"><span>Órbita</span></a>
+        <a class="rail__dot" href="#fadely"><span>Fadely</span></a>
+        <a class="rail__dot" href="#hefesto"><span>Hefesto 3D</span></a>
+        <a class="rail__dot" href="#arduino"><span>Arduino IOT</span></a>
+        <a class="rail__dot" href="#sobre-mi"><span>Sobre mí</span></a>
+        <a class="rail__dot" href="#contacto"><span>Contacto</span></a>
+    </nav>
 
-        <!-------------contenido------------->
-        <div class="box content">
-            <div class="wrapper">
-                <h2 id="about">Hola, bienvenido a mi <span class="colored">portafolio</span> </h2>
-                <div class="divider ltr"></div>
-                <p>Soy un desarrollador en formación con una fuerte pasión por la tecnología. Actualmente me encuentro
-                    creando y aprendiendo a desarrollar proyectos que buscan resolver problemas reales y mejorar la
-                    experiencia de las personas. <span class="colored">Me caracterizo por la curiosidad, el compromiso y
-                        las
-                        ganas de seguir creciendo profesionalmente.</span>
+    <!-- cartelito que acompaña al puntero sobre la escena -->
+    <p class="tip" id="tip" aria-hidden="true"></p>
+
+    <main id="contenido">
+
+        <!------------- inicio ------------->
+        <section class="station station--home" id="inicio" aria-labelledby="hero-title">
+            <div class="hero">
+                <p class="pill">
+                    <span class="pill__dot" aria-hidden="true"></span>
+                    Puerto Iguazú, Misiones · Argentina
                 </p>
-                <div class="divider ltr"></div>
-
-                <!-------------achivaments------------->
-                <section class="achivaments">
-                    <div>
-                        <h3 class="section-title">Actualmente trabajando en:</h3>
-                    </div>
-                    <ul class="progress-list">
-                        <li><ion-icon name="briefcase-outline"></ion-icon> Portafolio personal</li>
-                        <li><ion-icon name="school-outline"></ion-icon> Tesis IAES (Analista de Sistemas)</li>
-                        <li><ion-icon name="calculator-outline"></ion-icon> Sistema de amortización (académico)</li>
-                        <li><ion-icon name="cart-outline"></ion-icon> E-commerce Hefesto</li>
-                    </ul>
-                </section>
-
-
-                <!-------------tecnolgias------------->
-                <div class="divider"></div>
-                <h2><span class="colored">Tecnologías </spnan>
-                </h2>
-                <div class="divider ltr"></div>
-
-                <section class="skills">
-                    <h3>Móvil</h3>
-                    <section class="skills-grid">
-                        <div class="skill">
-                            <span class="iconify tech-icon" data-icon="simple-icons:flutter"></span>
-                            <p>Flutter</p>
-                        </div>
-                        <div class="skill">
-                            <span class="iconify tech-icon" data-icon="simple-icons:dart"></span>
-                            <p>Dart</p>
-                        </div>
-                    </section>
-
-                    <h3>Backend</h3>
-                    <section class="skills-grid">
-                        <div class="skill">
-                            <span class="iconify tech-icon" data-icon="simple-icons:firebase"></span>
-                            <p>Firebase</p>
-                        </div>
-                        <div class="skill">
-                            <span class="iconify tech-icon" data-icon="mdi:database"></span>
-                            <p>SQL Server</p>
-                        </div>
-                        <div class="skill">
-                            <span class="iconify tech-icon" data-icon="simple-icons:csharp"></span>
-                            <p>C#</p>
-                        </div>
-                    </section>
-
-
-                    <h3>Herramientas</h3>
-                    <section class="skills-grid">
-                        <div class="skill"><span class="iconify tech-icon" data-icon="simple-icons:github"></span>
-                            <p>GitHub</p>
-                        </div>
-                        <div class="skill"><span class="iconify tech-icon"
-                                data-icon="simple-icons:visualstudiocode"></span>
-                            <p>Visual Studio Code</p>
-                        </div>
-                        <div class="skill"><span class="iconify tech-icon"
-                                data-icon="simple-icons:androidstudio"></span>
-                            <p>Android Studio</p>
-                        </div>
-                        <div class="skill">
-                            <span class="iconify tech-icon" data-icon="simple-icons:arduino"></span>
-                            <p>Arduino IDE</p>
-                        </div>
-                    </section>
-
-                    <h3>En aprendizaje</h3>
-                    <section class="skills-grid">
-                        <div class="skill"><span class="iconify tech-icon" data-icon="simple-icons:html5"></span>
-                            <p>HTML</p>
-                        </div>
-                        <div class="skill"><span class="iconify tech-icon" data-icon="simple-icons:css3"></span>
-                            <p>CSS</p>
-                        </div>
-                        <div class="skill"><span class="iconify tech-icon" data-icon="simple-icons:javascript"></span>
-                            <p>JavaScript</p>
-                        </div>
-                        <div class="skill"><span class="iconify tech-icon" data-icon="simple-icons:postgresql"></span>
-                            <p>PostgresSQL</p>
-                        </div>
-                    </section>
-                </section>
-                <!------------- experiencia ------------->
-                <div class="divider"></div>
-                <h1 id="resume">Mi <span class="colored">experiencia</span></h1>
-                <div class="divider ltr"></div>
-                <div class="experience">
-                    <h2>Escuela de Robótica</h2>
-                    <h4>Proyectos educativos <span class="date">Marzo, 2022</span> &#x26AC; <span
-                            class="date">Actualmente</span></h4>
-                    <p>
-                        Participación en el desarrollo y acompañamiento de proyectos tecnológicos
-                        en el ámbito educativo, trabajando con Arduino, sensores y lógica de
-                        programación. Experiencia práctica en la creación de soluciones didácticas,
-                        prototipos y sistemas básicos orientados al aprendizaje tecnológico.
-                    </p>
+                <h1 class="hero__title" id="hero-title">Alexander <span>Ibarra</span></h1>
+                <p class="hero__role">Robótica, apps y plataformas web.</p>
+                <p class="hero__lead">Enseño robótica, desarrollo productos digitales y soy cofundador de Órbita.
+                    Este es mi taller: recorrelo, o tocá lo que quieras de la escena.</p>
+                <div class="hero__actions">
+                    <a class="btn btn--glow" href="#orbita">
+                        Recorrer el taller
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>
+                    </a>
+                    <a class="btn btn--glass" href="#contacto">Contactame</a>
                 </div>
-
-                <section class="experiences">
-                    <div class="experience">
-                        <h2>Desarrollador de Software en formación</h2>
-                        <h4>Proyectos académicos y personales</h4>
-                        <p>
-                            Actualmente me encuentro desarrollando distintos proyectos como parte de
-                            mi formación y crecimiento profesional. Entre ellos, un sistema de ventas
-                            con React y PostgreSQL, un sistema de amortización para Matemática en Flutter,
-                            mi tesis con Flutter y PostgreSQL, y un portafolio web creado con HTML, CSS y JavaScript.
-                        </p>
-                    </div>
-                    <!--
-                    <div class="experience">
-                        <h2>Proyecto: Sistema de Ventas</h2>
-                        <h4>React · PostgreSQL</h4>
-                        <p>
-                            Desarrollo de un sistema de ventas funcional enfocado en buenas prácticas
-                            de arquitectura y diseño. El proyecto incluye manejo de estado, reportes,
-                            gráficos, autenticación y una estructura basada en componentes reutilizables.
-                            Actualmente en proceso de implementación y mejora continua.
-                        </p>
-                    </div>
-
-                    <div class="experience">
-                        <h2>Proyecto académico: Sistema de Amortización</h2>
-                        <h4>Flutter · Dart</h4>
-                        <p>
-                            Desarrollo de un sistema de amortización como proyecto académico para Matemática.
-                            El objetivo es calcular y comparar planes de amortización, mostrando cuotas,
-                            intereses y saldo de forma clara. Actualmente en construcción y validación de resultados.
-                        </p>
-                    </div>
-
-                    <div class="experience">
-                        <h2>Proyecto académico y tesis</h2>
-                        <h4>Flutter · PostgreSQL</h4>
-                        <p>
-                            Desarrollo de un sistema como trabajo final de tesis para la carrera de
-                            Analista de Sistemas. El proyecto está orientado a la creación de una
-                            aplicación funcional utilizando Flutter como frontend y PostgreSQL como
-                            base de datos.
-                        </p>
-                    </div>-->
-
-                </section>
-
-                <!--------------- contribuciones ----------->
-                <div class="divider"></div>
-                <h1>Mis <span class="colored">Contribuciones</span></h1>
-                <div class="divider ltr"></div>
-
-                <section class="contribution">
-                    <activity-graph id="activityGraph" range-start="2026-01-01" range-end="2026-12-31"
-                        activity-levels="0,1,3,6,10">
-                    </activity-graph>
-                </section>
-
-
-                <!------------- proyectos ------------->
-                <div class="divider"></div>
-                <h1 id="projects">Mis <span class="colored">proyectos</span></h1>
-                <div class="divider ltr"></div>
-
-                <section class="projects-empty">
-                    <div class="projects-empty__icon">
-                        <ion-icon name="construct-outline"></ion-icon>
-                    </div>
-
-                    <div class="projects-empty__content">
-                        <h2>Proyectos en desarrollo</h2>
-                        <p class="muted">
-                            Me encuentro trabajando activamente en distintos proyectos de software.
-                            Esta sección se actualizará a medida que los proyectos esten terminados.
-                        </p>
-
-
-                    </div>
-                </section>
-                <!-- ------------- contact ------------- -->
-                <div class="divider"></div>
-                <h1 id="contact">Mi <span class="colored">contacto</span></h1>
-                <div class="divider ltr"></div>
-
-                <section class="contact">
-                    <div class="contact-head">
-                        <p class="muted">
-                            Para colaboraciones, feedback o consultas profesionales, podés contactarme a través de los
-                            siguientes medios.
-                        </p>
-                    </div>
-
-                    <div class="contact-grid">
-                        <!-- tarjeta 1 -->
-                        <div class="contact-card">
-                            <div class="contact-icon">
-                                <ion-icon name="mail-outline"></ion-icon>
-                            </div>
-                            <div class="contact-info">
-                                <h3>Email</h3>
-                                <p class="muted">Ideal para propuestas o consultas formales.</p>
-                                <a class="contact-link"
-                                    href="https://mail.google.com/mail/?view=cm&to=alexanderibarra.dev@gmail.com"
-                                    target="_blank" rel="noopener">
-                                    alexanderibarra.dev@gmail.com
-                                </a>
-                                <p class="muted">Respuesta en 24–48 hs.</p>
-                            </div>
-                        </div>
-
-
-                        <!-- tarjeta 2 -->
-                        <div class="contact-card">
-                            <div class="contact-icon">
-                                <ion-icon name="logo-linkedin"></ion-icon>
-                            </div>
-                            <div class="contact-info">
-                                <h3>LinkedIn</h3>
-                                <p class="muted">Conectemos y sigamos el contacto profesional.</p>
-                                <a class="contact-link" href="https://www.linkedin.com/in/alexander-ibarra-179238170/"
-                                    target="_blank" rel="noopener">Ver perfil</a>
-                            </div>
-                        </div>
-
-                        <!-- tarjeta 3 -->
-                        <div class="contact-card">
-                            <div class="contact-icon">
-                                <ion-icon name="logo-github"></ion-icon>
-                            </div>
-                            <div class="contact-info">
-                                <h3>GitHub</h3>
-                                <p class="muted">Código y avances de proyectos (cuando los publique).</p>
-                                <a class="contact-link" href="https://github.com/ale050417" target="_blank"
-                                    rel="noopener">Ver repositorios</a>
-                            </div>
-                        </div>
-                        <!-- tarjeta 4 -->
-                        <div class="contact-card">
-                            <div class="contact-icon">
-                                <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-                            </div>
-                            <div class="contact-info">
-                                <h3>Formulario de contacto</h3>
-                                <p class="muted">Completá el formulario para establecer contacto.</p>
-
-                                <form id="contactForm" class="contact-form">
-                                    <div class="row">
-                                        <input type="text" name="name" placeholder="Tu nombre" required>
-                                        <input type="email" name="email" placeholder="Tu email" required>
-                                    </div>
-                                    <input type="text" name="subject" placeholder="Asunto (opcional)">
-                                    <textarea name="message" rows="4" placeholder="Tu mensaje..." required></textarea>
-
-                                    <!-- anti-spam simple (campo trampa invisible) -->
-                                    <input type="text" name="website" autocomplete="off" tabindex="-1"
-                                        style="position:absolute; left:-9999px; opacity:0; height:0; width:0;">
-
-
-                                    <button class="btn-primary" type="submit">
-                                        Enviar mensaje <ion-icon name="send-outline"></ion-icon>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                <ul class="hero__facts">
+                    <li><strong>4</strong> productos publicados</li>
+                    <li><strong>2</strong> apps en Google Play</li>
+                    <li><strong>CPO</strong> y cofundador de Órbita</li>
+                </ul>
             </div>
-        </div>
-    </div>
-    <!-- Floating buttons (mobile) -->
-    <div class="fab-stack" aria-label="Acciones rápidas">
-        <button class="fab" onclick="theme()" aria-label="Cambiar tema">
-            <ion-icon id="lightBtnFab" name="sunny-outline"></ion-icon>
-            <ion-icon id="darkBtnFab" name="moon-outline" style="display:none;"></ion-icon>
-        </button>
+            <p class="scroll-hint" id="scrollHint" aria-hidden="true">
+                <span class="scroll-hint__mouse"></span>
+                Deslizá para recorrer
+            </p>
+        </section>
 
-        <button class="fab fab-primary" id="openMobileMenu" aria-label="Abrir menú">
-            <ion-icon name="apps-outline"></ion-icon>
-        </button>
-    </div>
+        <!------------- Órbita ------------->
+        <section class="station station--left" id="orbita" aria-labelledby="orbita-title" style="--accent: #6ea4ff">
+            <article class="panel">
+                <div class="panel__head">
+                    <img class="panel__logo" src="assets/projects/orbita-logo.webp" width="160" height="160" alt=""
+                        loading="lazy" decoding="async">
+                    <p class="panel__kicker">01 · SaaS de e-commerce</p>
+                    <p class="status"><span class="status__dot" aria-hidden="true"></span>En producción</p>
+                </div>
+                <h2 class="panel__title" id="orbita-title">Órbita</h2>
+                <p class="panel__tagline">La tienda online para comercios, sin comisiones por venta.</p>
+                <p class="panel__desc">Catálogo, stock, pedidos y cobros en un solo panel que se adapta al rubro de
+                    cada negocio. La fundé con dos compañeros de facultad y dirijo el producto.</p>
 
-    <!-- Panel menu mobile -->
-    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-        <div class="mobile-menu-panel box">
-            <div class="mobile-menu-head">
-                <span>Secciones</span>
-                <button class="mobile-close" id="closeMobileMenu" aria-label="Cerrar">✕</button>
-            </div>
+                <ul class="stats">
+                    <li><strong>0 %</strong>comisión por venta</li>
+                    <li><strong>18</strong>rubros a medida</li>
+                    <li><strong>IA</strong>asistente Orbi</li>
+                </ul>
 
-            <a href="#about" class="mobile-link">Sobre mí</a>
-            <a href="#resume" class="mobile-link">Experiencia</a>
-            <a href="#projects" class="mobile-link">Proyectos</a>
-            <a href="#contact" class="mobile-link">Contacto</a>
-        </div>
+                <dl class="meta">
+                    <div>
+                        <dt>Rol</dt>
+                        <dd>Cofundador y CPO</dd>
+                    </div>
+                    <div>
+                        <dt>Con</dt>
+                        <dd>
+                            <!-- Portafolios de los cofundadores: reemplazá cada href por el link de su portafolio. -->
+                            <a class="person" href="https://www.orbita.site/nosotros" target="_blank" rel="noopener">Mateo
+                                Rojas <span>CEO</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-up-right"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
+                            <a class="person" href="https://www.orbita.site/nosotros" target="_blank" rel="noopener">Alan
+                                Vega <span>CTO</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-up-right"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>Stack</dt>
+                        <dd>
+                            <ul class="chips">
+                                <li>Next.js</li>
+                                <li>React</li>
+                                <li>Mercado Pago</li>
+                            </ul>
+                        </dd>
+                    </div>
+                </dl>
 
-        <button class="mobile-backdrop" id="mobileBackdrop" aria-label="Cerrar"></button>
-    </div>
+                <div class="panel__actions">
+                    <a class="btn btn--glow" href="https://www.orbita.site/" target="_blank" rel="noopener">
+                        Visitar orbita.site
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-up-right"/></svg>
+                        <span class="sr-only">(abre en una pestaña nueva)</span>
+                    </a>
+                    <a class="btn btn--glass" href="https://demo.orbita.site/" target="_blank" rel="noopener">
+                        Probar la demo
+                        <span class="sr-only">(abre en una pestaña nueva)</span>
+                    </a>
+                </div>
+            </article>
+        </section>
 
-    <!-- scripts AL FINAL -->
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <script src="script.js"></script>
+        <!------------- Fadely ------------->
+        <section class="station station--right" id="fadely" aria-labelledby="fadely-title" style="--accent: #ff7a6b">
+            <article class="panel">
+                <div class="panel__head">
+                    <img class="panel__logo" src="assets/projects/fadely-logo.webp" width="160" height="160" alt=""
+                        loading="lazy" decoding="async">
+                    <p class="panel__kicker">02 · App Android</p>
+                    <p class="status"><span class="status__dot" aria-hidden="true"></span>En desarrollo activo</p>
+                </div>
+                <h2 class="panel__title" id="fadely-title">Fadely</h2>
+                <p class="panel__tagline">Turnos de barbería en Puerto Iguazú, sin llamadas ni esperas.</p>
+                <p class="panel__desc">El cliente reserva cuando quiere y la barbería maneja agenda, servicios y
+                    equipo desde el teléfono. Está pensada para una zona de frontera: tolera los cortes de señal y
+                    avisa cuando algo no se pudo guardar.</p>
+
+                <ul class="points">
+                    <li>Alta de la barbería en cuatro pasos guiados</li>
+                    <li>Equipo con códigos de vinculación y permisos</li>
+                    <li>Reservas con varios servicios y cola virtual</li>
+                </ul>
+
+                <dl class="meta">
+                    <div>
+                        <dt>Rol</dt>
+                        <dd>Producto, diseño y desarrollo</dd>
+                    </div>
+                    <div>
+                        <dt>Stack</dt>
+                        <dd>
+                            <ul class="chips">
+                                <li>Flutter</li>
+                                <li>Dart</li>
+                                <li>Supabase</li>
+                                <li>Mercado Pago</li>
+                            </ul>
+                        </dd>
+                    </div>
+                </dl>
+
+                <div class="panel__actions">
+                    <a class="btn btn--glow" href="https://play.google.com/store/apps/details?id=com.ibarra.fadely"
+                        target="_blank" rel="noopener">
+                        <svg class="icon icon--brand" aria-hidden="true" focusable="false"><use href="#b-googleplay"/></svg>
+                        Ver en Google Play
+                        <span class="sr-only">(abre en una pestaña nueva)</span>
+                    </a>
+                </div>
+            </article>
+        </section>
+
+        <!------------- Hefesto 3D ------------->
+        <section class="station station--left" id="hefesto" aria-labelledby="hefesto-title" style="--accent: #e6b04a">
+            <article class="panel">
+                <div class="panel__head">
+                    <img class="panel__logo" src="assets/projects/hefesto-logo.webp" width="160" height="160" alt=""
+                        loading="lazy" decoding="async">
+                    <p class="panel__kicker">03 · E-commerce</p>
+                    <p class="status"><span class="status__dot" aria-hidden="true"></span>En producción</p>
+                </div>
+                <h2 class="panel__title" id="hefesto-title">Hefesto 3D</h2>
+                <p class="panel__tagline">Tienda online de impresión 3D a pedido.</p>
+                <p class="panel__desc">Más de cien productos con filtros por categoría, pedidos a medida y un panel
+                    de gestión propio. Se paga con Mercado Pago y cada consulta sale directo a WhatsApp.</p>
+
+                <ul class="points">
+                    <li>Catálogo, ofertas y pedidos a medida</li>
+                    <li>Panel de gestión para productos y pedidos</li>
+                    <li>Tests unitarios y de punta a punta</li>
+                </ul>
+
+                <dl class="meta">
+                    <div>
+                        <dt>Rol</dt>
+                        <dd>Diseño y desarrollo full-stack</dd>
+                    </div>
+                    <div>
+                        <dt>Stack</dt>
+                        <dd>
+                            <ul class="chips">
+                                <li>Next.js</li>
+                                <li>TypeScript</li>
+                                <li>Tailwind CSS</li>
+                                <li>Supabase</li>
+                                <li>Drizzle ORM</li>
+                                <li>Mercado Pago</li>
+                            </ul>
+                        </dd>
+                    </div>
+                </dl>
+
+                <div class="panel__actions">
+                    <a class="btn btn--glow" href="https://hefesto3d.com.ar/" target="_blank" rel="noopener">
+                        Visitar hefesto3d.com.ar
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-up-right"/></svg>
+                        <span class="sr-only">(abre en una pestaña nueva)</span>
+                    </a>
+                    <a class="btn btn--glass" href="https://github.com/ale050417/hefesto" target="_blank"
+                        rel="noopener">
+                        <svg class="icon icon--brand" aria-hidden="true" focusable="false"><use href="#b-github"/></svg>
+                        Código
+                        <span class="sr-only">(abre en una pestaña nueva)</span>
+                    </a>
+                </div>
+            </article>
+        </section>
+
+        <!------------- Arduino IOT ------------->
+        <section class="station station--right" id="arduino" aria-labelledby="arduino-title" style="--accent: #ff9a3d">
+            <article class="panel">
+                <div class="panel__head">
+                    <img class="panel__logo" src="assets/projects/arduino-iot-logo.webp" width="160" height="160"
+                        alt="" loading="lazy" decoding="async">
+                    <p class="panel__kicker">04 · App Android · IoT</p>
+                    <p class="status"><span class="status__dot" aria-hidden="true"></span>Publicada</p>
+                </div>
+                <h2 class="panel__title" id="arduino-title">Arduino IOT</h2>
+                <p class="panel__tagline">Los sensores de tu Arduino en el teléfono, por Bluetooth y en tiempo real.
+                </p>
+                <p class="panel__desc">Se conecta a módulos HC-05 y HC-06, muestra temperatura y humedad en vivo y
+                    dispara alertas de fuego, con llamada automática si hace falta. También controla LEDs y relés a
+                    distancia.</p>
+
+                <dl class="meta">
+                    <div>
+                        <dt>Rol</dt>
+                        <dd>Diseño y desarrollo</dd>
+                    </div>
+                    <div>
+                        <dt>Stack</dt>
+                        <dd>
+                            <ul class="chips">
+                                <li>Flutter</li>
+                                <li>Dart</li>
+                                <li>Bluetooth</li>
+                                <li>Arduino</li>
+                            </ul>
+                        </dd>
+                    </div>
+                </dl>
+
+                <div class="panel__actions">
+                    <a class="btn btn--glow" href="https://play.google.com/store/apps/details?id=com.alexander.appiot"
+                        target="_blank" rel="noopener">
+                        <svg class="icon icon--brand" aria-hidden="true" focusable="false"><use href="#b-googleplay"/></svg>
+                        Ver en Google Play
+                        <span class="sr-only">(abre en una pestaña nueva)</span>
+                    </a>
+                </div>
+            </article>
+        </section>
+
+        <!------------- sobre mí ------------->
+        <section class="station station--left" id="sobre-mi" aria-labelledby="sobre-mi-title">
+            <article class="panel panel--about">
+                <div class="about">
+                    <div class="about__main">
+                        <div class="about__top">
+                            <img class="about__photo" src="assets/alexander-ibarra-480.webp" width="480" height="600"
+                                alt="Retrato de Alexander Ibarra" loading="lazy" decoding="async">
+                            <div>
+                                <p class="panel__kicker">05 · Sobre mí</p>
+                                <h2 class="panel__title panel__title--sm" id="sobre-mi-title">La robótica es lo mío.
+                                </h2>
+                            </div>
+                        </div>
+                        <p class="panel__desc">Desde 2021 doy clases de robótica y programación en la Escuela de
+                            Robótica: Arduino, ESP32, sensores, impresión 3D y equipos de estudiantes que llevan sus
+                            proyectos a ferias y competencias de la Red Maker.</p>
+                        <p class="panel__desc">Con esa misma lógica de armar, probar y terminar construyo software:
+                            apps en Flutter y plataformas web que negocios reales usan.</p>
+                        <div class="panel__actions">
+                            <a class="btn btn--glow" href="#contacto">Hablemos</a>
+                            <a class="btn btn--glass" href="assets/Alexander_Ibarra_CV.pdf" download>
+                                Descargar CV
+                                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-download"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="about__side">
+                        <ol class="timeline">
+                            <li><span>Hoy</span><strong>Cofundador y CPO</strong>Órbita</li>
+                            <li><span>2021 — hoy</span><strong>Facilitador técnico</strong>Escuela de Robótica</li>
+                            <li><span>En curso</span><strong>Analista de Sistemas</strong>IAES</li>
+                        </ol>
+                        <dl class="meta">
+                            <div>
+                                <dt>Robótica</dt>
+                                <dd>
+                                    <ul class="chips">
+                                        <li>Arduino</li>
+                                        <li>ESP32</li>
+                                        <li>Sensores</li>
+                                        <li>Impresión 3D</li>
+                                    </ul>
+                                </dd>
+                            </div>
+                            <div>
+                                <dt>Software</dt>
+                                <dd>
+                                    <ul class="chips">
+                                        <li>Flutter</li>
+                                        <li>Dart</li>
+                                        <li>Next.js</li>
+                                        <li>React</li>
+                                        <li>TypeScript</li>
+                                        <li>Supabase</li>
+                                        <li>PostgreSQL</li>
+                                        <li>Firebase</li>
+                                    </ul>
+                                </dd>
+                            </div>
+                            <div>
+                                <dt>GitHub</dt>
+                                <dd>
+                                    <a class="person" href="https://github.com/ale050417" target="_blank"
+                                        rel="noopener"><span class="github-total" id="activitySummary">Ver
+                                            perfil</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-up-right"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!------------- contacto ------------->
+        <section class="station station--right" id="contacto" aria-labelledby="contacto-title">
+            <article class="panel panel--wide">
+                <p class="panel__kicker">06 · Contacto</p>
+                <h2 class="panel__title panel__title--sm" id="contacto-title">¿Armamos algo?</h2>
+                <p class="panel__desc">Escribime por el medio que prefieras. Respondo en 24 a 48 horas.</p>
+
+                <ul class="channels">
+                    <li>
+                        <a class="channel" href="mailto:alexanderibarra.dev@gmail.com">
+                            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>
+                            <span id="emailText">alexanderibarra.dev@gmail.com</span>
+                        </a>
+                        <button class="copy-btn" id="copyEmail" type="button" aria-label="Copiar el email">
+                            <svg class="icon icon--copy" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg>
+                            <svg class="icon icon--check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>
+                            <span class="copy-btn__label">Copiar</span>
+                        </button>
+                    </li>
+                    <li>
+                        <a class="channel" href="https://www.linkedin.com/in/alexander-ibarra-179238170/"
+                            target="_blank" rel="noopener">
+                            <svg class="icon icon--brand" aria-hidden="true" focusable="false"><use href="#b-linkedin"/></svg>
+                            LinkedIn
+                            <span class="sr-only">(abre en una pestaña nueva)</span>
+                        </a>
+                        <a class="channel" href="https://github.com/ale050417" target="_blank" rel="noopener">
+                            <svg class="icon icon--brand" aria-hidden="true" focusable="false"><use href="#b-github"/></svg>
+                            GitHub
+                            <span class="sr-only">(abre en una pestaña nueva)</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <form class="contact-form" id="contactForm" novalidate>
+                    <div class="form-status" id="formStatus" role="status" tabindex="-1" hidden></div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="name">Nombre</label>
+                            <input type="text" id="name" name="name" autocomplete="name" required>
+                            <p class="field__error" id="name-error" hidden></p>
+                        </div>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" autocomplete="email" inputmode="email"
+                                required>
+                            <p class="field__error" id="email-error" hidden></p>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" name="message" rows="3" required></textarea>
+                        <p class="field__error" id="message-error" hidden></p>
+                    </div>
+
+                    <!-- anti-spam simple (campo trampa invisible) -->
+                    <div class="field--trap" aria-hidden="true">
+                        <label for="website">No completar</label>
+                        <input type="text" id="website" name="website" autocomplete="off" tabindex="-1">
+                    </div>
+
+                    <button class="btn btn--glow btn--block" id="contactSubmit" type="submit">
+                        <span class="btn__label">Enviar mensaje</span>
+                        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg>
+                    </button>
+                </form>
+
+                <p class="panel__foot">© <span id="year">2026</span> Alexander Ibarra · Hecho en Puerto Iguazú.</p>
+            </article>
+        </section>
+    </main>
 </body>
+
 </html>
