@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Alexander Ibarra — Robótica, apps y plataformas web</title>
     <meta name="description"
-        content="El taller de Alexander Ibarra: robótica, apps móviles y plataformas web. Cofundador de Órbita y creador de Fadely, Hefesto 3D y Arduino IOT. Puerto Iguazú, Misiones.">
+        content="El taller de Alexander Ibarra: robótica, apps móviles y plataformas web. Cofundador de Órbita, fundador de Hefesto 3D y creador de Fadely y Arduino IOT. Puerto Iguazú, Misiones.">
     <meta name="author" content="Alexander Ibarra">
     <meta name="theme-color" content="#04060A">
     <meta name="color-scheme" content="dark">
@@ -89,7 +89,7 @@
         "@type": "Person",
         "name": "Alexander Ibarra",
         "url": "https://www.alexanderibarra.com.ar/",
-        "jobTitle": "Facilitador de robótica, desarrollador y cofundador de Órbita",
+        "jobTitle": "Facilitador de robótica, desarrollador, cofundador de Órbita y fundador de Hefesto 3D",
         "email": "mailto:alexanderibarra.dev@gmail.com",
         "address": {
             "@type": "PostalAddress",
@@ -215,8 +215,8 @@
                 </p>
                 <h1 class="hero__title" id="hero-title">Alexander <span>Ibarra</span></h1>
                 <p class="hero__role">Robótica, apps y plataformas web.</p>
-                <p class="hero__lead">Enseño robótica, desarrollo productos digitales y soy cofundador de Órbita.
-                    Este es mi taller: recorrelo, o tocá lo que quieras de la escena.</p>
+                <p class="hero__lead">Enseño robótica y desarrollo productos digitales. Soy cofundador de Órbita y
+                    fundador de Hefesto 3D. Este es mi taller: recorrelo, o tocá lo que quieras de la escena.</p>
                 <div class="hero__actions">
                     <a class="btn btn--glow" href="#orbita">
                         Recorrer el taller
@@ -246,12 +246,12 @@
                     <p class="status"><span class="status__dot" aria-hidden="true"></span>En producción</p>
                 </div>
                 <h2 class="panel__title" id="orbita-title">Órbita</h2>
-                <p class="panel__tagline">La tienda online para comercios, sin comisiones por venta.</p>
-                <p class="panel__desc">Catálogo, stock, pedidos y cobros en un solo panel que se adapta al rubro de
-                    cada negocio. La fundé con dos compañeros de facultad y dirijo el producto.</p>
+                <p class="panel__tagline">La tienda online que se adapta al rubro de cada comercio.</p>
+                <p class="panel__desc">Catálogo, stock, pedidos y cobros en un solo panel, con un asistente de IA
+                    que acompaña al comerciante. La fundé con dos compañeros de facultad y dirijo el producto.</p>
 
                 <ul class="stats">
-                    <li><strong>0 %</strong>comisión por venta</li>
+                    <li><strong>Demo</strong>abierta para probar</li>
                     <li><strong>18</strong>rubros a medida</li>
                     <li><strong>IA</strong>asistente Orbi</li>
                 </ul>
@@ -272,12 +272,46 @@
                         </dd>
                     </div>
                     <div>
-                        <dt>Stack</dt>
+                        <dt>Frontend</dt>
                         <dd>
                             <ul class="chips">
-                                <li>Next.js</li>
-                                <li>React</li>
-                                <li>Mercado Pago</li>
+                                <li>Next.js 16</li>
+                                <li>React 19</li>
+                                <li>TypeScript</li>
+                                <li>Tailwind CSS</li>
+                                <li>TanStack Query</li>
+                            </ul>
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>Backend</dt>
+                        <dd>
+                            <ul class="chips">
+                                <li>NestJS 11</li>
+                                <li>Prisma</li>
+                                <li>PostgreSQL</li>
+                                <li>JWT + Argon2</li>
+                            </ul>
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>IA</dt>
+                        <dd>
+                            <ul class="chips">
+                                <li>Gemini</li>
+                                <li>Groq</li>
+                                <li>ONNX Runtime</li>
+                            </ul>
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>Infra</dt>
+                        <dd>
+                            <ul class="chips">
+                                <li>Google Cloud Run</li>
+                                <li>Vercel</li>
+                                <li>Cloudflare R2</li>
+                                <li>GitHub Actions</li>
                             </ul>
                         </dd>
                     </div>
@@ -324,13 +358,34 @@
                         <dd>Producto, diseño y desarrollo</dd>
                     </div>
                     <div>
-                        <dt>Stack</dt>
+                        <dt>App</dt>
                         <dd>
                             <ul class="chips">
                                 <li>Flutter</li>
                                 <li>Dart</li>
+                                <li>Riverpod</li>
+                                <li>GoRouter</li>
+                            </ul>
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>Backend</dt>
+                        <dd>
+                            <ul class="chips">
                                 <li>Supabase</li>
-                                <li>Mercado Pago</li>
+                                <li>PostgreSQL</li>
+                                <li>Row Level Security</li>
+                                <li>Edge Functions</li>
+                            </ul>
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>Servicios</dt>
+                        <dd>
+                            <ul class="chips">
+                                <li>Hive · sin conexión</li>
+                                <li>Firebase Cloud Messaging</li>
+                                <li>OpenStreetMap</li>
                             </ul>
                         </dd>
                     </div>
@@ -353,35 +408,63 @@
                 <div class="panel__head">
                     <img class="panel__logo" src="assets/projects/hefesto-logo.webp" width="160" height="160" alt=""
                         loading="lazy" decoding="async">
-                    <p class="panel__kicker">03 · E-commerce</p>
+                    <p class="panel__kicker">03 · Vidriera digital</p>
                     <p class="status"><span class="status__dot" aria-hidden="true"></span>En producción</p>
                 </div>
                 <h2 class="panel__title" id="hefesto-title">Hefesto 3D</h2>
-                <p class="panel__tagline">Tienda online de impresión 3D a pedido.</p>
+                <p class="panel__tagline">Impresión 3D a pedido: el catálogo de mi emprendimiento.</p>
                 <p class="panel__desc">Más de cien productos con filtros por categoría, pedidos a medida y un panel
-                    de gestión propio. Se paga con Mercado Pago y cada consulta sale directo a WhatsApp.</p>
+                    de gestión propio. Puede funcionar como tienda con checkout; hoy la uso como vidriera digital, y
+                    cada consulta sale directo a WhatsApp.</p>
 
                 <ul class="points">
                     <li>Catálogo, ofertas y pedidos a medida</li>
                     <li>Panel de gestión para productos y pedidos</li>
-                    <li>Tests unitarios y de punta a punta</li>
                 </ul>
 
                 <dl class="meta">
                     <div>
                         <dt>Rol</dt>
-                        <dd>Diseño y desarrollo full-stack</dd>
+                        <dd>Fundador · diseño y desarrollo full-stack</dd>
                     </div>
                     <div>
-                        <dt>Stack</dt>
+                        <dt>Frontend</dt>
                         <dd>
                             <ul class="chips">
-                                <li>Next.js</li>
+                                <li>Next.js 16 · App Router</li>
+                                <li>React 19</li>
                                 <li>TypeScript</li>
-                                <li>Tailwind CSS</li>
-                                <li>Supabase</li>
+                                <li>Tailwind CSS 4</li>
+                            </ul>
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>Datos</dt>
+                        <dd>
+                            <ul class="chips">
+                                <li>PostgreSQL</li>
                                 <li>Drizzle ORM</li>
-                                <li>Mercado Pago</li>
+                                <li>Supabase Auth</li>
+                                <li>Zod</li>
+                            </ul>
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>Calidad</dt>
+                        <dd>
+                            <ul class="chips">
+                                <li>Vitest</li>
+                                <li>Playwright</li>
+                                <li>GitHub Actions</li>
+                            </ul>
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>Infra</dt>
+                        <dd>
+                            <ul class="chips">
+                                <li>Vercel</li>
+                                <li>Resend</li>
                             </ul>
                         </dd>
                     </div>
@@ -391,12 +474,6 @@
                     <a class="btn btn--glow" href="https://hefesto3d.com.ar/" target="_blank" rel="noopener">
                         Visitar hefesto3d.com.ar
                         <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-up-right"/></svg>
-                        <span class="sr-only">(abre en una pestaña nueva)</span>
-                    </a>
-                    <a class="btn btn--glass" href="https://github.com/ale050417/hefesto" target="_blank"
-                        rel="noopener">
-                        <svg class="icon icon--brand" aria-hidden="true" focusable="false"><use href="#b-github"/></svg>
-                        Código
                         <span class="sr-only">(abre en una pestaña nueva)</span>
                     </a>
                 </div>
@@ -466,7 +543,8 @@
                             Robótica: Arduino, ESP32, sensores, impresión 3D y equipos de estudiantes que llevan sus
                             proyectos a ferias y competencias de la Red Maker.</p>
                         <p class="panel__desc">Con esa misma lógica de armar, probar y terminar construyo software:
-                            apps en Flutter y plataformas web que negocios reales usan.</p>
+                            apps en Flutter y plataformas web que negocios reales usan. También soy fundador de
+                            Hefesto 3D, mi emprendimiento de impresión 3D a pedido.</p>
                         <div class="panel__actions">
                             <a class="btn btn--glow" href="#contacto">Hablemos</a>
                             <a class="btn btn--glass" href="assets/Alexander_Ibarra_CV.pdf" download>
@@ -479,6 +557,7 @@
                     <div class="about__side">
                         <ol class="timeline">
                             <li><span>Hoy</span><strong>Cofundador y CPO</strong>Órbita</li>
+                            <li><span>Hoy</span><strong>Fundador</strong>Hefesto 3D</li>
                             <li><span>2021 — hoy</span><strong>Facilitador técnico</strong>Escuela de Robótica</li>
                             <li><span>En curso</span><strong>Analista de Sistemas</strong>IAES</li>
                         </ol>
