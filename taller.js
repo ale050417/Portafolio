@@ -1303,6 +1303,8 @@ const pointer = new THREE.Vector2();
 const pointerSmooth = new THREE.Vector2();
 let width = 1;
 let height = 1;
+// el lienzo no tiene tamaño (ventana minimizada, o las herramientas de desarrollo tapando la página)
+let empty = false;
 let intro = reduced ? 1 : 0;
 let started = false;
 
@@ -1319,6 +1321,9 @@ function resize(force) {
     // rehace cada vez que aparecen y desaparecen al deslizar
     const w = canvas.clientWidth;
     const h = canvas.clientHeight;
+    // con tamaño cero no hay dónde dibujar: se espera a que vuelva, sin tocar nada
+    empty = !w || !h;
+    if (empty) return;
     if (force === true || w !== width || h !== height) {
         width = w;
         height = h;
@@ -1488,6 +1493,7 @@ let samples = 0;
 function tick(now) {
     const since = Math.min(now - (last || now), 100);
     last = now;
+    if (empty) return;
 
     if (started && intro < 1) intro = Math.min(1, intro + since / 2600);
     updateGoal();
@@ -1551,6 +1557,8 @@ function tick(now) {
 
 // ---------- interacción ----------
 addEventListener('resize', resize);
+// (el lienzo también puede cambiar de tamaño sin que cambie la ventana)
+new ResizeObserver(() => resize()).observe(canvas);
 addEventListener('pointermove', (e) => {
     pointer.set((e.clientX / width) * 2 - 1, -(e.clientY / height) * 2 + 1);
     if (touch) return;
@@ -1636,6 +1644,8 @@ if (lite) optimize();
 clock('bake', mark);
 await breathe();
 
+// una pestaña abierta en segundo plano puede no tener tamaño todavía: se espera a que lo tenga
+while (!canvas.clientWidth || !canvas.clientHeight) await new Promise((done) => { setTimeout(done, 250); });
 resize(true);
 updateGoal();
 view.pos.copy(goal.pos);

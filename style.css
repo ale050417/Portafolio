@@ -509,28 +509,12 @@ html:not(.js) .loader {
     letter-spacing: -.02em;
 }
 
+/* el logo: la A de los títulos sobre el degradé del sitio, con un brillo suave debajo */
 .brand__mark {
     width: 34px;
     height: 34px;
-    filter: drop-shadow(0 0 10px rgba(79, 198, 206, .45));
-}
-
-.brand__mark-bg {
-    fill: rgba(11, 16, 23, .7);
-    stroke: rgba(79, 198, 206, .7);
-    stroke-width: 1.4;
-}
-
-.brand__mark-a {
-    fill: none;
-    stroke: var(--fg);
-    stroke-width: 2.4;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.brand__mark-dot {
-    fill: var(--teal);
+    border-radius: 8px;
+    box-shadow: 0 6px 18px -6px rgba(79, 198, 206, .65);
 }
 
 .nav {
@@ -1469,8 +1453,7 @@ main {
         transition: opacity .6s var(--ease), transform .6s var(--ease);
     }
 
-    .hero__title span,
-    .brand__mark {
+    .hero__title span {
         filter: none;
     }
 }

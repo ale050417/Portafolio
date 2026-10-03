@@ -1,15 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-    <style>
-        .bg { fill: #0A0A0B; }
-        .a { fill: none; stroke: #FFFFFF; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
-        .dot { fill: #4FC6CE; stroke: #0A0A0B; stroke-width: 2; }
-        @media (prefers-color-scheme: dark) {
-            .bg { fill: #F5F5F4; }
-            .a { stroke: #0A0A0B; }
-            .dot { stroke: #F5F5F4; }
-        }
-    </style>
-    <rect class="bg" width="32" height="32" rx="7"/>
-    <path class="a" d="M9 23.5 16 8.5l7 15M11.8 18h8.4"/>
-    <circle class="dot" cx="25" cy="7" r="3"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <!-- la A de Sora (la tipografía de los títulos) sobre el degradé del sitio -->
+    <defs>
+        <linearGradient id="fondo" x1="6" y1="4" x2="58" y2="60" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#A8F5F8"/>
+            <stop offset=".48" stop-color="#4FC6CE"/>
+            <stop offset="1" stop-color="#6EA4FF"/>
+        </linearGradient>
+    </defs>
+    <rect width="64" height="64" rx="15" fill="url(#fondo)"/>
+    <path d="M15.57 47.1 25.5 16.1H38.16L48.43 47.1H40.28L32.3 21.62L34.55 22.47H28.94L31.24 21.62L23.46 47.1ZM23.68 39.92 26.05 33.47H37.82L40.2 39.92Z" fill="#04060A"/>
 </svg>

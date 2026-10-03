@@ -10,17 +10,25 @@
     <meta name="author" content="Alexander Ibarra">
     <meta name="theme-color" content="#04060A">
     <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://www.alexanderibarra.com.ar/">
 
+    <!-- vista previa al compartir el enlace (WhatsApp, LinkedIn…): la imagen necesita la dirección completa -->
     <meta property="og:type" content="website">
     <meta property="og:locale" content="es_AR">
     <meta property="og:site_name" content="Alexander Ibarra">
+    <meta property="og:url" content="https://www.alexanderibarra.com.ar/">
     <meta property="og:title" content="Alexander Ibarra — Robótica, apps y plataformas web">
     <meta property="og:description"
         content="Un taller en 3D para recorrer: Órbita, Fadely, Hefesto 3D y Arduino IOT.">
-    <meta property="og:image" content="assets/og.jpg">
+    <meta property="og:image" content="https://www.alexanderibarra.com.ar/assets/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="El taller 3D del portafolio de Alexander Ibarra">
     <meta name="twitter:card" content="summary_large_image">
 
+    <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
     <!-- three.js para la escena 3D -->
     <script type="importmap">
@@ -80,6 +88,7 @@
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Alexander Ibarra",
+        "url": "https://www.alexanderibarra.com.ar/",
         "jobTitle": "Facilitador de robótica, desarrollador y cofundador de Órbita",
         "email": "mailto:alexanderibarra.dev@gmail.com",
         "address": {
@@ -141,10 +150,16 @@
     <!------------- encabezado ------------->
     <header class="site-header" id="siteHeader">
         <a class="brand" href="#inicio" aria-label="Alexander Ibarra, ir al inicio">
-            <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-                <rect class="brand__mark-bg" x="1" y="1" width="30" height="30" rx="9"/>
-                <path class="brand__mark-a" d="M9.5 23 16 9l6.5 14M12 18h8"/>
-                <circle class="brand__mark-dot" cx="24.5" cy="7.5" r="2.6"/>
+            <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+                <defs>
+                    <linearGradient id="brandFondo" x1="6" y1="4" x2="58" y2="60" gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stop-color="#A8F5F8"/>
+                        <stop offset=".48" stop-color="#4FC6CE"/>
+                        <stop offset="1" stop-color="#6EA4FF"/>
+                    </linearGradient>
+                </defs>
+                <rect width="64" height="64" rx="15" fill="url(#brandFondo)"/>
+                <path d="M15.57 47.1 25.5 16.1H38.16L48.43 47.1H40.28L32.3 21.62L34.55 22.47H28.94L31.24 21.62L23.46 47.1ZM23.68 39.92 26.05 33.47H37.82L40.2 39.92Z" fill="#04060A"/>
             </svg>
             <span class="brand__name">Alexander Ibarra</span>
         </a>
