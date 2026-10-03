@@ -1,4 +1,8 @@
 // api/contact.js
+// Formulario de contacto: guarda el mensaje para el panel privado (/admin) y avisa por mail.
+// Alcanza con que una de las dos cosas salga bien para que el mensaje no se pierda.
+
+import { addDoc, clip, dbReady, place, sourceOf, updateDoc } from "./_lib/portal.js";
 
 function escapeHtml(str) {
   return String(str ?? "")
@@ -15,7 +19,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name, email, subject, message, website } = req.body || {};
+    const { name, email, subject, message, website, search, referrer } = req.body || {};
 
     // anti-spam (honeypot)
     if (website) {
@@ -27,10 +31,33 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Faltan campos obligatorios." });
     }
 
+    // primero queda guardado: así se puede leer en el panel aunque el mail no llegue
+    let savedId = null;
+    if (dbReady()) {
+      try {
+        const ua = String(req.headers["user-agent"] || "");
+        const origin = sourceOf({ search: clip(search, 500), referrer: clip(referrer, 500), ua, host: req.headers.host });
+        const { country, city } = place(req);
+        savedId = await addDoc("portfolio_messages", {
+          name: clip(name, 200),
+          email: clip(email, 320),
+          subject: clip(subject, 300),
+          message: clip(message, 10000),
+          is_read: false,
+          emailed: false,
+          source: origin.source,
+          country,
+          city,
+        });
+      } catch (_) {}
+    }
+    const saved = savedId !== null;
+
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
     const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL;
 
     if (!RESEND_API_KEY || !CONTACT_TO_EMAIL) {
+      if (saved) return res.status(200).json({ message: "Mensaje enviado correctamente." });
       return res.status(500).json({
         error: "Faltan variables de entorno en Vercel (RESEND_API_KEY / CONTACT_TO_EMAIL).",
       });
@@ -123,7 +150,13 @@ export default async function handler(req, res) {
       respData = raw ? JSON.parse(raw) : {};
     } catch (_) {}
 
-    if (!resp.ok) {
+    if (resp.ok && saved) {
+      try {
+        await updateDoc("portfolio_messages", savedId, { emailed: true });
+      } catch (_) {}
+    }
+
+    if (!resp.ok && !saved) {
       return res.status(500).json({
         error: respData?.message || respData?.error || raw || "No se pudo enviar el mensaje.",
         details: respData,

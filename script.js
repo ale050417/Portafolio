@@ -262,6 +262,8 @@ if (form) {
             subject: '',
             message: form.elements.message.value.trim(),
             website: form.elements.website.value,
+            // de dónde llegó quien escribe
+            ...landing(),
         };
 
         try {
@@ -324,6 +326,33 @@ async function loadContributions() {
 }
 
 loadContributions();
+
+// ===== Visitas: una por pestaña, para el panel privado (/admin) =====
+// (no usa cookies; el panel deja una marca en este navegador para no contar las visitas propias)
+function landing() {
+    try {
+        const saved = sessionStorage.getItem('portafolio:llegada');
+        if (saved) return JSON.parse(saved);
+    } catch (_) { }
+    return { search: location.search, referrer: document.referrer };
+}
+
+function trackVisit() {
+    try {
+        if (localStorage.getItem('portafolio:propio') || sessionStorage.getItem('portafolio:llegada')) return;
+        sessionStorage.setItem('portafolio:llegada', JSON.stringify(landing()));
+    } catch (_) {
+        return;
+    }
+    fetch('/api/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...landing(), path: location.pathname, lang: navigator.language }),
+        keepalive: true,
+    }).catch(() => { });
+}
+
+trackVisit();
 
 //año del pie
 const year = document.getElementById('year');

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel · Alexander Ibarra</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#04060A">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400..600&family=Sora:wght@300..700&display=swap">
+    <link rel="stylesheet" href="/admin/admin.css">
+    <script src="/admin/admin.js" defer></script>
+</head>
+
+<body>
+    <div class="glow" aria-hidden="true"></div>
+
+    <!------------- entrada ------------->
+    <main class="gate" id="gate" hidden>
+        <form class="card gate__card" id="loginForm" novalidate>
+            <p class="kicker">Panel privado</p>
+            <h1 class="gate__title">Sala de control</h1>
+            <p class="muted">Las visitas y los mensajes del portafolio.</p>
+            <label class="field">
+                <span>Contraseña</span>
+                <input type="password" id="password" name="password" autocomplete="current-password" required>
+            </label>
+            <p class="notice" id="loginStatus" role="alert" hidden></p>
+            <button class="btn btn--glow" type="submit" id="loginButton">Entrar</button>
+            <a class="back" href="/">Volver al portafolio</a>
+        </form>
+    </main>
+
+    <!------------- panel ------------->
+    <div class="app" id="app" hidden>
+        <header class="top">
+            <div>
+                <p class="kicker">Panel privado</p>
+                <h1 class="top__title">Sala de control</h1>
+            </div>
+            <div class="top__actions">
+                <a class="btn btn--glass" href="/">Ver el portafolio</a>
+                <button class="btn btn--glass" type="button" id="logout">Salir</button>
+            </div>
+        </header>
+
+        <nav class="bar" aria-label="Secciones del panel">
+            <div class="tabs" role="tablist">
+                <button class="tab" role="tab" type="button" id="tabVisits" aria-controls="visits"
+                    aria-selected="true">Visitas</button>
+                <button class="tab" role="tab" type="button" id="tabMessages" aria-controls="messages"
+                    aria-selected="false">Mensajes <span class="badge" id="unreadBadge" hidden></span></button>
+            </div>
+            <label class="range" id="rangeBox">
+                <span class="sr-only">Período</span>
+                <select id="range">
+                    <option value="1">Últimas 24 horas</option>
+                    <option value="7">Últimos 7 días</option>
+                    <option value="30" selected>Últimos 30 días</option>
+                    <option value="90">Últimos 90 días</option>
+                    <option value="365">Último año</option>
+                </select>
+            </label>
+        </nav>
+
+        <p class="notice" id="appStatus" role="alert" hidden></p>
+
+        <!-- visitas -->
+        <main class="view" id="visits" role="tabpanel" aria-labelledby="tabVisits">
+            <ul class="tiles" id="tiles"></ul>
+
+            <div class="grid">
+                <section class="card card--wide" aria-labelledby="daysTitle">
+                    <h2 class="card__title" id="daysTitle">Visitas por día</h2>
+                    <div class="days" id="days"></div>
+                </section>
+
+                <section class="card" aria-labelledby="sourcesTitle">
+                    <h2 class="card__title" id="sourcesTitle">De dónde llegan</h2>
+                    <ul class="rows" id="sources"></ul>
+                    <p class="hint">«Directo» es quien escribió la dirección o abrió el enlace desde WhatsApp, un
+                        mail o un PDF. Para distinguirlos, compartí el enlace con <code>?de=whatsapp</code>,
+                        <code>?de=cv</code> o <code>?de=instagram</code> al final.</p>
+                </section>
+
+                <section class="card" aria-labelledby="placesTitle">
+                    <h2 class="card__title" id="placesTitle">Desde qué lugar</h2>
+                    <ul class="rows" id="countries"></ul>
+                    <h3 class="card__sub">Ciudades</h3>
+                    <ul class="rows" id="cities"></ul>
+                </section>
+
+                <section class="card" aria-labelledby="devicesTitle">
+                    <h2 class="card__title" id="devicesTitle">Con qué equipo</h2>
+                    <ul class="rows" id="devices"></ul>
+                    <div id="campaignsBox" hidden>
+                        <h3 class="card__sub">Campañas</h3>
+                        <ul class="rows" id="campaigns"></ul>
+                    </div>
+                </section>
+
+                <section class="card card--wide" aria-labelledby="recentTitle">
+                    <h2 class="card__title" id="recentTitle">Últimas visitas</h2>
+                    <div class="table-wrap">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Cuándo</th>
+                                    <th scope="col">Origen</th>
+                                    <th scope="col">Lugar</th>
+                                    <th scope="col">Equipo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- mensajes -->
+        <main class="view" id="messages" role="tabpanel" aria-labelledby="tabMessages" hidden>
+            <ul class="inbox" id="inbox"></ul>
+        </main>
+    </div>
+
+    <p class="tooltip" id="tooltip" role="status" hidden></p>
+    <noscript>
+        <p class="notice notice--float">El panel necesita JavaScript.</p>
+    </noscript>
+</body>
+
+</html>
