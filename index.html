@@ -487,28 +487,51 @@
                     <img class="panel__logo" src="assets/projects/arduino-iot-logo.webp" width="160" height="160"
                         alt="" loading="lazy" decoding="async">
                     <p class="panel__kicker">04 · App Android · IoT</p>
-                    <p class="status"><span class="status__dot" aria-hidden="true"></span>Publicada</p>
+                    <p class="status"><span class="status__dot" aria-hidden="true"></span>Publicada · v2.0</p>
                 </div>
                 <h2 class="panel__title" id="arduino-title">Arduino IOT</h2>
-                <p class="panel__tagline">Los sensores de tu Arduino en el teléfono, por Bluetooth y en tiempo real.
-                </p>
-                <p class="panel__desc">Se conecta a módulos HC-05 y HC-06, muestra temperatura y humedad en vivo y
-                    dispara alertas de fuego, con llamada automática si hace falta. También controla LEDs y relés a
-                    distancia.</p>
+                <p class="panel__tagline">Los sensores de tu Arduino en el teléfono, por Bluetooth y con alarmas al
+                    instante.</p>
+                <p class="panel__desc">Se conecta a módulos HC-05 y HC-06 y muestra en vivo temperatura, humedad,
+                    calidad del aire, llama y sonido. Las alarmas de fuego, gas y temperatura corren en el Arduino:
+                    suenan aunque el teléfono no esté conectado y pueden llamar solas a un número de emergencia.
+                    Desde la app también se manejan el LED, el relé, el buzzer y una pantalla LCD, y se elige el pin
+                    de cada módulo sin tocar el código. Trae un modo demo para probarla sin hardware.</p>
 
                 <dl class="meta">
                     <div>
                         <dt>Rol</dt>
-                        <dd>Diseño y desarrollo</dd>
+                        <dd>Diseño, app y firmware</dd>
                     </div>
                     <div>
-                        <dt>Stack</dt>
+                        <dt>App</dt>
                         <dd>
                             <ul class="chips">
                                 <li>Flutter</li>
                                 <li>Dart</li>
-                                <li>Bluetooth</li>
-                                <li>Arduino</li>
+                                <li>Bluetooth SPP</li>
+                                <li>Tests del protocolo</li>
+                            </ul>
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>Firmware</dt>
+                        <dd>
+                            <ul class="chips">
+                                <li>Arduino · C++</li>
+                                <li>Protocolo serie propio</li>
+                                <li>EEPROM</li>
+                            </ul>
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>Hardware</dt>
+                        <dd>
+                            <ul class="chips">
+                                <li>HC-05 / HC-06</li>
+                                <li>DHT11</li>
+                                <li>MQ135</li>
+                                <li>LCD I²C</li>
                             </ul>
                         </dd>
                     </div>
